@@ -11,5 +11,12 @@
         <maven.compiler.target>18</maven.compiler.target>
         <exec.mainClass>com.mycompany.servidor_menjadora.Servidor_Menjadora</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.influxdb</groupId>
+            <artifactId>influxdb-client-java</artifactId>
+            <version>6.6.0</version>
+        </dependency>
+    </dependencies>
     <name>Servidor_Menjadora</name>
 </project>

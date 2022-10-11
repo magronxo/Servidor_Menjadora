@@ -57,14 +57,14 @@ public class Servidor_Menjadora {
             for (Maquina maquina : maquines){
                 maquina.funcionamentMaquina();
                 horesExecucio++;
-                System.out.println("Son les "+ horesExecucio);
+                System.out.println("\n\tSon les "+ horesExecucio);
                 if(horesExecucio >= 24){
                     maquina.resetejaDia();
                     horesExecucio = 0;
                 }
             }
             try {
-                TimeUnit.SECONDS.sleep(5);     
+                TimeUnit.SECONDS.sleep(1);     
                 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Servidor_Menjadora.class.getName()).log(Level.SEVERE, null, ex);

@@ -14,14 +14,24 @@ import server.machine.io.Sensor;
  */
 public class Simulador {
     
-    //VARIABLE
+    //VARIABLES
     public boolean dreta;
     public double sensorPlat_esquerra = 12.4;
     public double sensorPlat_dreta = 20.1;
     public double sensorNivell_esquerra = 2;
     public double sensorNivell_dreta = 2;
     
+ 
+    
+    //CONSTRUCTORS
+    public Simulador(boolean dreta){
+        this.dreta=dreta;
 
+    }
+    public Simulador(){
+    }
+    
+       //ACCESSORS
     public void setSensorPlat_esquerra(double sensorPlat_esquerra) {
         this.sensorPlat_esquerra = sensorPlat_esquerra;
     }
@@ -55,14 +65,6 @@ public class Simulador {
     }
     
     
-    //CONSTRUCTORS
-    public Simulador(boolean dreta){
-        this.dreta=dreta;
-
-    }
-    public Simulador(){
-    }
-    
     
     //METODES
     public static Simulador addSimulador(boolean dreta){
@@ -70,7 +72,7 @@ public class Simulador {
         return new Simulador(dreta);
     }
     
-    //METODES
+    //FUNCIONS
     public double retornaNivell(){
         if(!dreta){
             return sensorNivell_esquerra;
@@ -88,9 +90,9 @@ public class Simulador {
     }
     
     public void mascotaMenja(Sensor plat, String nomMascota){
-        int quantitatMenjada = 20;
+        int quantitatMenjada = 5;
         plat.setValorSimulador(plat.getValor() - quantitatMenjada);
-        System.out.println("La mascota " + nomMascota +  " ha menjat " + quantitatMenjada + " grams");
+        System.out.println("La " + nomMascota +  " ha menjat " + quantitatMenjada + " grams");
     }
     
     public void carregaDiposit(Sensor diposit){
