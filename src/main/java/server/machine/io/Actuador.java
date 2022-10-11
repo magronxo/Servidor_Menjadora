@@ -34,7 +34,7 @@ public class Actuador {
         if(!block){
             this.interruptor = true;
         }
-        //Simula increment de pes al Plat
+
     }
     
     public void desactivaRele(){

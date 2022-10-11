@@ -4,6 +4,7 @@
  */
 package server;
 
+import server.data.Dades;
 import server.machine.Mascota;
 import server.machine.Menjadora;
 
@@ -24,17 +25,20 @@ public class Maquina {
     private Mascota mascotaDreta, mascotaEsquerra;
     private static int raccioExtra = 10;
     private Menjadora menjadoraDreta, menjadoraEsquerra;
+    private Dades dadesDreta, dadesEsquerra;
     
     //CONSTRUCTORS
     public Maquina(){    
     }
-    public Maquina(int id, Mascota mascotaDreta, Mascota mascotaEsquerra, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra, int raccioExtra){
+    public Maquina(int id, Mascota mascotaDreta, Mascota mascotaEsquerra, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra, int raccioExtra, Dades dadesDreta, Dades dadesEsquerra){
         this.id=id;
         this.mascotaDreta=mascotaDreta;
         this.mascotaEsquerra=mascotaEsquerra;
         this.raccioExtra=raccioExtra;
         this.menjadoraDreta=menjadoraDreta;
         this.menjadoraEsquerra=menjadoraEsquerra;
+        this.dadesDreta=dadesDreta;
+        this.dadesEsquerra=dadesEsquerra;
     }
     
     
@@ -48,17 +52,21 @@ public class Maquina {
     public static Maquina addMaquina(int id){
         Mascota mascotaDreta, mascotaEsquerra;
         Menjadora menjadoraDreta, menjadoraEsquerra;
+        Dades dadesDreta, dadesEsquerra;
         
-        mascotaDreta = Mascota.addMascota(1);
-        
+        mascotaDreta = Mascota.addMascota(1);        
         mascotaEsquerra = Mascota.addMascota(2);
         
         menjadoraDreta = Menjadora.addMenjadora(true, mascotaDreta);
         menjadoraEsquerra = Menjadora.addMenjadora(false, mascotaEsquerra);
+        
         menjadoraDreta.setDosisDiaria(mascotaDreta.getGat(), mascotaDreta.getEdat(), mascotaDreta.getPesMascota());
         menjadoraEsquerra.setDosisDiaria(mascotaEsquerra.getGat(), mascotaEsquerra.getEdat(), mascotaEsquerra.getPesMascota());
         
-        return new Maquina(id, mascotaDreta, mascotaEsquerra, menjadoraDreta, menjadoraEsquerra, raccioExtra);
+        dadesDreta = new Dades().addDades(menjadoraDreta);        
+        dadesEsquerra = new Dades().addDades(menjadoraEsquerra);
+        
+        return new Maquina(id, mascotaDreta, mascotaEsquerra, menjadoraDreta, menjadoraEsquerra, raccioExtra, dadesDreta, dadesEsquerra);
     }
     
     public void funcionamentMaquina(){
@@ -66,6 +74,12 @@ public class Maquina {
         menjadoraEsquerra.funciona();
     }
     public void resetejaDia(){
+        dadesDreta.escriuDades(menjadoraDreta.getGramsAcumulatAvui());
+        dadesEsquerra.escriuDades(menjadoraEsquerra.getGramsAcumulatAvui());
+        
+        dadesDreta.llegeixDades();
+        dadesEsquerra.llegeixDades();
+        
         menjadoraDreta.resetejaDia();
         menjadoraEsquerra.resetejaDia();
     }
