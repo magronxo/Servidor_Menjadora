@@ -5,12 +5,11 @@
 
 package server;
 
-import session.Compte;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static server.Maquina.addMaquina;
 
 /**
  *
@@ -23,15 +22,24 @@ public class Servidor_Menjadora {
     
     private static int id = 1;
     private static boolean sortirPrograma = false;
+    private static Maquina maquina;
 
 
-    //CONSTRUCTOR
+    //CONSTRUCTORS
     public Servidor_Menjadora(int id){
         this.id=id;
     }
-
+    public Servidor_Menjadora(){
+    }
+    
+    //ACCESSORS
+    public static Maquina getMaquina() {
+        return maquina;
+    }
+    
+    //-------   MAIN ---------
     public static void main(String[] args) {
-
+    //public void iniciaPrograma(){
         //Reb la connexió
         //Registra el compte -->Pantalla
         //Crea una màquina per al compte registrat
@@ -47,12 +55,19 @@ public class Servidor_Menjadora {
         
         //arrays de maquines i comptes
         //ArrayList<Compte> comptes = new ArrayList<Compte>();
+        
+        
+        
+        
         ArrayList<Maquina> maquines = new ArrayList<Maquina>();
         
         //Compte compte = new Compte();
-        
-        maquines.add(new Maquina().addMaquina(1));
+        maquina = new Maquina();
+        maquines.add(maquina.addMaquina(1));
         int horesExecucio = 0;
+        
+        
+        
         while(!sortirPrograma){
             for (Maquina maquina : maquines){
                 maquina.funcionamentMaquina();
@@ -72,4 +87,6 @@ public class Servidor_Menjadora {
         }
         
     }
+
+
 }

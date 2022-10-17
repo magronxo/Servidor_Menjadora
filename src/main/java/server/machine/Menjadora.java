@@ -6,7 +6,7 @@ package server.machine;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import server.Simulador;
+import server.machine.io.Simulador;
 import server.data.Dades;
 import server.machine.io.Actuador;
 import server.machine.io.Sensor;
@@ -25,10 +25,38 @@ public class Menjadora {
     private static final int TIPUS_SENSOR = 1;
     private static final int KG_MARGE_PES = 1;
     
+    
+    
     //VARIABLES
     private int limitRaccionsDia, percentatgeAvui, raccionsAcumuladesAvui;
     private boolean dreta;
+    
+    private Mascota mascota;
+    private Diposit diposit;
+    private Actuador motorMenjadora;
+    private Sensor sensorPlat;
+    private Simulador simulador;
 
+
+    //CONSTRUCTORS
+    public Menjadora(boolean dreta, Diposit diposit, Actuador motorMenjadora, Mascota mascota, Sensor sensorPlat, Simulador simulador){
+        this.dreta=dreta;
+        this.diposit=diposit;
+        this.motorMenjadora=motorMenjadora;
+        this.sensorPlat=sensorPlat;
+        this.raccionsAcumuladesAvui=0;
+        this.mascota = mascota;
+        this.simulador=simulador;
+    }
+    
+    public Menjadora(boolean dreta){
+         this.dreta=dreta;
+    }
+    public Menjadora(){
+    }
+
+
+    //ACCESSORS
     public boolean isDreta() {
         return dreta;
     }
@@ -58,27 +86,10 @@ public class Menjadora {
         return limitDiari;
     }
     
-    private Mascota mascota;
-    private Diposit diposit;
-    private Actuador motorMenjadora;
-    private Sensor sensorPlat;
-    private Simulador simulador;
-    private Dades dades;
-    
-    
-    //CONSTRUCTORS
-    public Menjadora(boolean dreta, Diposit diposit, Actuador motorMenjadora, Mascota mascota, Sensor sensorPlat, Simulador simulador, Dades dades){
-        this.dreta=dreta;
-        this.diposit=diposit;
-        this.motorMenjadora=motorMenjadora;
-        this.sensorPlat=sensorPlat;
-        this.raccionsAcumuladesAvui=0;
-        this.mascota = mascota;
-        this.simulador=simulador;
-        this.dades=dades;
+    public Mascota getMascota() {
+        return mascota;
     }
 
-    //ACCESSORS
     public void setLimitDiari(int limitDiari){
         //Pantalla Principal permet canviar aquest paràmetre
         this.limitDiari = limitDiari;
@@ -94,11 +105,9 @@ public class Menjadora {
         Simulador simulador = new Simulador(dreta);
         Diposit diposit = new Diposit().addDiposit(simulador.retornaNivell());
         Actuador motor = new Actuador().addMotor();
-        Sensor sensorPlat = new Sensor().addSensor(TIPUS_SENSOR,1);
-        Dades dades = new Dades(dreta);
-        
+        Sensor sensorPlat = new Sensor().addSensor(TIPUS_SENSOR,1);  
        
-        return new Menjadora(dreta, diposit, motor, mascota, sensorPlat, simulador, dades);
+        return new Menjadora(dreta, diposit, motor, mascota, sensorPlat, simulador);
     }
     
     //FUNCIONS DE CÀLCUL

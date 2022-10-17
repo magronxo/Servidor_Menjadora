@@ -61,58 +61,7 @@ public class Dades {
     
     //FUNCIONS
     
-    public void creaOrg(){
-                InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token);
-
-        Organization org = influxDBClient.getOrganizationsApi()
-                .createOrganization("Menjadora 1" + System.currentTimeMillis());
-
-        String menjadoraId =  org.getId();
-        creaBuckets(org);
-        
- 
-    }
     
-    public void creaBuckets(Organization org){ 
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token);
-
-        //
-        // Create bucket "iot_bucket" with data retention set to 3,600 seconds
-        //
-        BucketRetentionRules retention = new BucketRetentionRules();
-        retention.setEverySeconds(3600);
-
-        Bucket bucket = influxDBClient.getBucketsApi().createBucket("iot-bucket", retention, "12bdc4164c2e8141");
-
-        //
-        // Create access token to "iot_bucket"
-        //
-        PermissionResource resource = new PermissionResource();
-        resource.setId(bucket.getId());
-        resource.setOrgID("12bdc4164c2e8141");
-        resource.setType(PermissionResource.TYPE_BUCKETS);
-
-        // Read permission
-        Permission read = new Permission();
-        read.setResource(resource);
-        read.setAction(Permission.ActionEnum.READ);
-
-        // Write permission
-        Permission write = new Permission();
-        write.setResource(resource);
-        write.setAction(Permission.ActionEnum.WRITE);
-
-        Authorization authorization = influxDBClient.getAuthorizationsApi()
-                .createAuthorization("12bdc4164c2e8141", Arrays.asList(read, write));
-
-        //
-        // Created token that can be use for writes to "iot_bucket"
-        //
-        String token = authorization.getToken();
-        System.out.println("Token: " + token);
-
-        influxDBClient.close();
-    }
     public void escriuDades(double gramsAcumulatAvui){
         
         InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org, bucket);

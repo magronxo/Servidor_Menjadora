@@ -4,6 +4,9 @@
  */
 package server;
 
+import gui.controller.Controlador_Principal;
+import gui.view.Pantalla_Principal;
+import static gui.view.Pantalla_Principal.addGui;
 import server.data.Dades;
 import server.machine.Mascota;
 import server.machine.Menjadora;
@@ -26,11 +29,12 @@ public class Maquina {
     private static int raccioExtra = 10;
     private Menjadora menjadoraDreta, menjadoraEsquerra;
     private Dades dadesDreta, dadesEsquerra;
+    private Controlador_Principal controlador;
     
     //CONSTRUCTORS
     public Maquina(){    
     }
-    public Maquina(int id, Mascota mascotaDreta, Mascota mascotaEsquerra, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra, int raccioExtra, Dades dadesDreta, Dades dadesEsquerra){
+    public Maquina(int id, Mascota mascotaDreta, Mascota mascotaEsquerra, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra, int raccioExtra, Dades dadesDreta, Dades dadesEsquerra, Controlador_Principal controlador){
         this.id=id;
         this.mascotaDreta=mascotaDreta;
         this.mascotaEsquerra=mascotaEsquerra;
@@ -39,6 +43,15 @@ public class Maquina {
         this.menjadoraEsquerra=menjadoraEsquerra;
         this.dadesDreta=dadesDreta;
         this.dadesEsquerra=dadesEsquerra;
+        this.controlador=controlador;
+    }
+
+    public Menjadora getMenjadoraDreta() {
+        return menjadoraDreta;
+    }
+
+    public Menjadora getMenjadoraEsquerra() {
+        return menjadoraEsquerra;
     }
     
     
@@ -53,6 +66,7 @@ public class Maquina {
         Mascota mascotaDreta, mascotaEsquerra;
         Menjadora menjadoraDreta, menjadoraEsquerra;
         Dades dadesDreta, dadesEsquerra;
+        Controlador_Principal controlador;
         
         mascotaDreta = Mascota.addMascota(1);        
         mascotaEsquerra = Mascota.addMascota(2);
@@ -65,8 +79,12 @@ public class Maquina {
         
         dadesDreta = new Dades().addDades(menjadoraDreta);        
         dadesEsquerra = new Dades().addDades(menjadoraEsquerra);
+             
+        controlador = new Controlador_Principal().addControlador(menjadoraDreta, menjadoraEsquerra);
+        //controlador.setMenjadoraDreta(menjadoraDreta);
+        //controlador.setMenjadoraEsquerra(menjadoraEsquerra);
         
-        return new Maquina(id, mascotaDreta, mascotaEsquerra, menjadoraDreta, menjadoraEsquerra, raccioExtra, dadesDreta, dadesEsquerra);
+        return new Maquina(id, mascotaDreta, mascotaEsquerra, menjadoraDreta, menjadoraEsquerra, raccioExtra, dadesDreta, dadesEsquerra, controlador);
     }
     
     public void funcionamentMaquina(){
@@ -74,11 +92,14 @@ public class Maquina {
         menjadoraEsquerra.funciona();
     }
     public void resetejaDia(){
-        dadesDreta.escriuDades(menjadoraDreta.getGramsAcumulatAvui());
-        dadesEsquerra.escriuDades(menjadoraEsquerra.getGramsAcumulatAvui());
+        //Creem DataBase (Org amb 2 buckets) quan l'usuari inicia sessio per primer cop
+        //dadesDreta.creaDataBase();
         
-        dadesDreta.llegeixDades();
-        dadesEsquerra.llegeixDades();
+        //dadesDreta.escriuDades(menjadoraDreta.getGramsAcumulatAvui());
+        //dadesEsquerra.escriuDades(menjadoraEsquerra.getGramsAcumulatAvui());
+        
+        //dadesDreta.llegeixDades();
+        //dadesEsquerra.llegeixDades();
         
         menjadoraDreta.resetejaDia();
         menjadoraEsquerra.resetejaDia();

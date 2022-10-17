@@ -4,8 +4,6 @@
  */
 package server.machine.io;
 
-import server.Simulador;
-
 /**
  *
  * @author oriol
