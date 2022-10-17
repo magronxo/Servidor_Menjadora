@@ -23,6 +23,7 @@ public class Servidor_Menjadora {
     private static int id = 1;
     private static boolean sortirPrograma = false;
     private static Maquina maquina;
+    private static int horesExecucio;
 
 
     //CONSTRUCTORS
@@ -35,6 +36,10 @@ public class Servidor_Menjadora {
     //ACCESSORS
     public static Maquina getMaquina() {
         return maquina;
+    }
+
+    public static int getHoresExecucio() {
+        return horesExecucio;
     }
     
     //-------   MAIN ---------
@@ -64,7 +69,7 @@ public class Servidor_Menjadora {
         //Compte compte = new Compte();
         maquina = new Maquina();
         maquines.add(maquina.addMaquina(1));
-        int horesExecucio = 0;
+        horesExecucio = 0;
         
         
         
@@ -72,6 +77,7 @@ public class Servidor_Menjadora {
             for (Maquina maquina : maquines){
                 maquina.funcionamentMaquina();
                 horesExecucio++;
+                maquina.getControlador().escriuValorsGui();
                 System.out.println("\n\tSon les "+ horesExecucio);
                 if(horesExecucio >= 24){
                     maquina.resetejaDia();

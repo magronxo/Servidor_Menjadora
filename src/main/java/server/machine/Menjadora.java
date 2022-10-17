@@ -30,6 +30,7 @@ public class Menjadora {
     //VARIABLES
     private int limitRaccionsDia, percentatgeAvui, raccionsAcumuladesAvui;
     private boolean dreta;
+    private double gramsRaccio,horesEntreRaccions, gramsAcumulatAvui, limitDiari;
     
     private Mascota mascota;
     private Diposit diposit;
@@ -60,7 +61,7 @@ public class Menjadora {
     public boolean isDreta() {
         return dreta;
     }
-    private double gramsRaccio,horesEntreRaccions, gramsAcumulatAvui, limitDiari;
+
 
     public int getLimitRaccionsDia() {
         return limitRaccionsDia;
@@ -89,6 +90,15 @@ public class Menjadora {
     public Mascota getMascota() {
         return mascota;
     }
+
+    public Diposit getDiposit() {
+        return diposit;
+    }
+
+    public Sensor getSensorPlat() {
+        return sensorPlat;
+    }
+     
 
     public void setLimitDiari(int limitDiari){
         //Pantalla Principal permet canviar aquest paràmetre
@@ -132,8 +142,14 @@ public class Menjadora {
             limitDiari = limitDiari / 1.2;
         }
      
-        gramsRaccio = limitDiari/limitRaccionsDia;
-        horesEntreRaccions = 24.0/limitRaccionsDia;
+        gramsRaccio = (double)limitDiari / limitRaccionsDia;
+        horesEntreRaccions = (double)24 / limitRaccionsDia;
+        gramsRaccio = new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        horesEntreRaccions = new BigDecimal(horesEntreRaccions).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        
+        
+        //gramsRaccio = limitDiari/limitRaccionsDia;
+        //horesEntreRaccions = 24.0/limitRaccionsDia;
 
         //TAULA VETERINÀRIA
         //Calcula limit diari

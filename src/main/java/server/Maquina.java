@@ -5,8 +5,6 @@
 package server;
 
 import gui.controller.Controlador_Principal;
-import gui.view.Pantalla_Principal;
-import static gui.view.Pantalla_Principal.addGui;
 import server.data.Dades;
 import server.machine.Mascota;
 import server.machine.Menjadora;
@@ -61,6 +59,11 @@ public class Maquina {
         raccioExtra = raccioExtra;
     }
 
+    public Controlador_Principal getControlador() {
+        return controlador;
+    }
+    
+
     //METODES
     public static Maquina addMaquina(int id){
         Mascota mascotaDreta, mascotaEsquerra;
@@ -103,6 +106,7 @@ public class Maquina {
         
         menjadoraDreta.resetejaDia();
         menjadoraEsquerra.resetejaDia();
+        controlador.escriuValorsGui();
     }
     
     //FUNCIONS

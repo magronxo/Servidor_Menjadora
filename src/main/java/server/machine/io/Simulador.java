@@ -21,8 +21,6 @@ public class Simulador {
     public double sensorNivell_esquerra = 2;
     public double sensorNivell_dreta = 2;
     
- 
-    
     //CONSTRUCTORS
     public Simulador(boolean dreta){
         this.dreta=dreta;

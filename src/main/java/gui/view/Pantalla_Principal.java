@@ -4,7 +4,9 @@
  */
 package gui.view;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import server.machine.Menjadora;
 
 /**
@@ -25,7 +27,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     
     
     
-    
+    /*
     public Pantalla_Principal(Menjadora menjadoraDreta, Menjadora menjadoraEsquerra){
         initComponents();
         this.menjadoraDreta=menjadoraDreta;
@@ -33,26 +35,9 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     }
     
-    public static Pantalla_Principal addGui(Menjadora menjadoraDreta, Menjadora menjadoraEsquerra){
-        return new Pantalla_Principal(menjadoraDreta,menjadoraEsquerra);
+    public static Pantalla_Principal addGui(){
+        return new Pantalla_Principal();
     }
-    
-    
-    
-    public void canviaLimitDiariEsquerra(String lde) {
-        limitDiariEsquerra.setText(lde);
-    }
-    
-    
-    
-    
-    ///////////////////////////////////////SOBREESCRIT AMB STRING  
-    /*public void limitDiariEsquerraPropertyChange(String text) {                                                  
-        // TODO add your handling code here:
-        //String ldE = String.valueOf(menjadoraEsquerra.getLimitDiari());
-        limitDiariEsquerra.setText(text);
-        
-    }/* 
     
     
     
@@ -188,7 +173,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         horaPantalla.setForeground(new java.awt.Color(0, 153, 153));
         horaPantalla.setText("17:14");
         horaPantalla.setToolTipText("");
-        jPanel1.add(horaPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
+        jPanel1.add(horaPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
         horaPantalla.getAccessibleContext().setAccessibleName("horaPantalla");
 
         limitDiariEsquerra.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
@@ -220,7 +205,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         diaMesHoraPantalla.setForeground(new java.awt.Color(0, 153, 153));
         diaMesHoraPantalla.setText("Divendres, 17 Setembre 2022");
         diaMesHoraPantalla.setToolTipText("");
-        jPanel1.add(diaMesHoraPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, -1));
+        jPanel1.add(diaMesHoraPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
         diaMesHoraPantalla.getAccessibleContext().setAccessibleName("diaMesAnyPantalla");
 
         nomMascotaDreta.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
@@ -238,6 +223,12 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel1.add(nomMascotaDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 250, -1));
         nomMascotaDreta.getAccessibleContext().setAccessibleName("");
 
+        progressBarEsquerra.setAutoscrolls(true);
+        progressBarEsquerra.setDoubleBuffered(true);
+        progressBarEsquerra.setFocusCycleRoot(true);
+        progressBarEsquerra.setFocusTraversalPolicyProvider(true);
+        progressBarEsquerra.setOpaque(true);
+        progressBarEsquerra.setStringPainted(true);
         jPanel1.add(progressBarEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 290, -1));
         progressBarEsquerra.getAccessibleContext().setAccessibleName("barAcumulatEsquerra");
 
@@ -263,6 +254,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(51, 51, 255));
         jLabel16.setText("g.");
         jLabel16.setToolTipText("");
+        jLabel16.setEnabled(false);
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, 40));
 
         jLabel17.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
@@ -282,30 +274,35 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(51, 51, 255));
         jLabel19.setText("g.");
         jLabel19.setToolTipText("");
+        jLabel19.setEnabled(false);
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, 40));
 
         jLabel20.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(51, 51, 255));
         jLabel20.setText("g.");
         jLabel20.setToolTipText("");
+        jLabel20.setEnabled(false);
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 160, -1, 30));
 
         jLabel21.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(51, 51, 255));
         jLabel21.setText("de");
         jLabel21.setToolTipText("");
+        jLabel21.setEnabled(false);
         jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, 40));
 
         jLabel23.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(51, 51, 255));
         jLabel23.setText("g.");
         jLabel23.setToolTipText("");
+        jLabel23.setEnabled(false);
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, 50));
 
         jLabel24.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(51, 51, 255));
         jLabel24.setText("g.");
         jLabel24.setToolTipText("");
+        jLabel24.setEnabled(false);
         jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 120, -1, 30));
 
         limitDiariDreta.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
@@ -356,6 +353,10 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel1.add(acumulatRaccionsDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 240, -1, 50));
         acumulatRaccionsDreta.getAccessibleContext().setAccessibleName("acumulatRaccionsDreta");
 
+        progressBarDreta.setAutoscrolls(true);
+        progressBarDreta.setDoubleBuffered(true);
+        progressBarDreta.setOpaque(true);
+        progressBarDreta.setStringPainted(true);
         jPanel1.add(progressBarDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 290, -1));
         progressBarDreta.getAccessibleContext().setAccessibleName("barAcumulatDreta");
 
@@ -363,6 +364,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jLabel33.setForeground(new java.awt.Color(51, 51, 255));
         jLabel33.setText("de");
         jLabel33.setToolTipText("");
+        jLabel33.setEnabled(false);
         jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 250, -1, 40));
 
         jLabel34.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
@@ -396,6 +398,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jLabel38.setForeground(new java.awt.Color(51, 51, 255));
         jLabel38.setText("g.");
         jLabel38.setToolTipText("");
+        jLabel38.setEnabled(false);
         jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 280, -1, 50));
 
         gramsRaccioDreta.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
@@ -481,10 +484,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_raccioExtraEsquerraActionPerformed
 
     private void limitDiariEsquerraPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_limitDiariEsquerraPropertyChange
-        // TODO add your handling code here:
-        //String ldE = String.valueOf(menjadoraEsquerra.getLimitDiari());
-        limitDiariEsquerra.setText("holaaaaa");
-        
+        // TODO add your handling code here:       
     }//GEN-LAST:event_limitDiariEsquerraPropertyChange
 
     private void nomMascotaEsquerraPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_nomMascotaEsquerraPropertyChange
@@ -494,84 +494,102 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     private void nomMascotaDretaVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_nomMascotaDretaVetoableChange
         // TODO add your handling code here:
-        //nomMascotaDreta.setText(menjadoraDreta.getMascota().getNom());
     }//GEN-LAST:event_nomMascotaDretaVetoableChange
 
     
     
     
         //ACCESSORS
-    public void setLimitDiariDreta(JLabel limitDiariDreta) {
-        this.limitDiariDreta = limitDiariDreta;
+    
+    //GETTERS
+    public JLabel getAcumulatGramsDreta() {
+        return acumulatGramsDreta;
     }
 
-    public void setLimitDiariEsquerra(JLabel limitDiariEsquerra) {
-        this.limitDiariEsquerra = limitDiariEsquerra;
+    public JLabel getAcumulatGramsEsquerra() {
+        return acumulatGramsEsquerra;
     }
 
-    public void setNivellDipositDreta(JLabel nivellDipositDreta) {
-        this.nivellDipositDreta = nivellDipositDreta;
+    public JLabel getAcumulatRaccionsDreta() {
+        return acumulatRaccionsDreta;
     }
 
-    public void setNivellDipositEsquerra(JLabel nivellDipositEsquerra) {
-        this.nivellDipositEsquerra = nivellDipositEsquerra;
+    public JLabel getAcumulatRaccionsEsquerra() {
+        return acumulatRaccionsEsquerra;
     }
 
-    public void setNomMascotaDreta(JLabel nomMascotaDreta) {
-        this.nomMascotaDreta = nomMascotaDreta;
+    public JLabel getDiaMesHoraPantalla() {
+        return diaMesHoraPantalla;
     }
 
-    public void setNomMascotaEsquerra(JLabel nomMascotaEsquerra) {
-        this.nomMascotaEsquerra = nomMascotaEsquerra;
+    public JLabel getGramsPlatDreta() {
+        return gramsPlatDreta;
     }
 
-    public void setRaccionsDreta(JLabel raccionsDreta) {
-        this.raccionsDreta = raccionsDreta;
+    public JLabel getGramsPlatEsquerra() {
+        return gramsPlatEsquerra;
     }
 
-    public void setRaccionsEsquerra(JLabel raccionsEsquerra) {
-        this.raccionsEsquerra = raccionsEsquerra;
+    public JLabel getGramsRaccioDreta() {
+        return gramsRaccioDreta;
     }
 
-    public void setAcumulatGramsDreta(JLabel acumulatGramsDreta) {
-        this.acumulatGramsDreta = acumulatGramsDreta;
+    public JLabel getGramsRaccioEsquerra() {
+        return gramsRaccioEsquerra;
     }
 
-    public void setAcumulatGramsEsquerra(JLabel acumulatGramsEsquerra) {
-        this.acumulatGramsEsquerra = acumulatGramsEsquerra;
+    public JLabel getHoraPantalla() {
+        return horaPantalla;
     }
 
-    public void setAcumulatRaccionsDreta(JLabel acumulatRaccionsDreta) {
-        this.acumulatRaccionsDreta = acumulatRaccionsDreta;
+    public JLabel getLimitDiariDreta() {
+        return limitDiariDreta;
     }
 
-    public void setAcumulatRaccionsEsquerra(JLabel acumulatRaccionsEsquerra) {
-        this.acumulatRaccionsEsquerra = acumulatRaccionsEsquerra;
+    public JLabel getLimitDiariEsquerra() {
+        return limitDiariEsquerra;
     }
 
-    public void setDiaMesHoraPantalla(JLabel diaMesHoraPantalla) {
-        this.diaMesHoraPantalla = diaMesHoraPantalla;
+    public JLabel getNivellDipositDreta() {
+        return nivellDipositDreta;
     }
 
-    public void setGramsPlatDreta(JLabel gramsPlatDreta) {
-        this.gramsPlatDreta = gramsPlatDreta;
+    public JLabel getNivellDipositEsquerra() {
+        return nivellDipositEsquerra;
     }
 
-    public void setGramsPlatEsquerra(JLabel gramsPlatEsquerra) {
-        this.gramsPlatEsquerra = gramsPlatEsquerra;
+    public JLabel getNomMascotaDreta() {
+        return nomMascotaDreta;
     }
 
-    public void setGramsRaccioDreta(JLabel gramsRaccioDreta) {
-        this.gramsRaccioDreta = gramsRaccioDreta;
+    public JLabel getNomMascotaEsquerra() {
+        return nomMascotaEsquerra;
     }
 
-    public void setGramsRaccioEsquerra(JLabel gramsRaccioEsquerra) {
-        this.gramsRaccioEsquerra = gramsRaccioEsquerra;
+    public JProgressBar getProgressBarDreta() {
+        return progressBarDreta;
     }
 
-    public void setHoraPantalla(JLabel horaPantalla) {
-        this.horaPantalla = horaPantalla;
+    public JProgressBar getProgressBarEsquerra() {
+        return progressBarEsquerra;
     }
+
+    public JButton getRaccioExtraDreta() {
+        return raccioExtraDreta;
+    }
+
+    public JButton getRaccioExtraEsquerra() {
+        return raccioExtraEsquerra;
+    }
+
+    public JLabel getRaccionsDreta() {
+        return raccionsDreta;
+    }
+
+    public JLabel getRaccionsEsquerra() {
+        return raccionsEsquerra;
+    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -609,8 +627,8 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     public javax.swing.JLabel nivellDipositEsquerra;
     public javax.swing.JLabel nomMascotaDreta;
     public javax.swing.JLabel nomMascotaEsquerra;
-    private javax.swing.JProgressBar progressBarDreta;
-    private javax.swing.JProgressBar progressBarEsquerra;
+    public javax.swing.JProgressBar progressBarDreta;
+    public javax.swing.JProgressBar progressBarEsquerra;
     public javax.swing.JButton raccioExtraDreta;
     public javax.swing.JButton raccioExtraEsquerra;
     public javax.swing.JLabel raccionsDreta;
