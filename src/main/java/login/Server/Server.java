@@ -5,20 +5,15 @@ import login.Constants;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Server {
-
-
-    static String host = "localhost";
-    static int port = 9999;
     protected Socket socket;
-    Map<String, String> loggedClients = new HashMap<String, String>();
-    Map<String, Long> caducitatClients = new HashMap<String, Long>(); //
+    Map<String, String> loggedClients = new HashMap<>(); // Registre de tokens per usuari
+    Map<String, Long> caducitatClients = new HashMap<>(); // Registre de data de login
     Map<String, String> usuaris = Map.of(     // Provisional, s'haurà de llegir d'una base de dades.
             "usuari1", "contrassenya1",
             "usuari2", "contrassenya2",
@@ -32,8 +27,13 @@ public class Server {
     public static void main(String[] args) throws Exception {
 
         Server servidor = new Server();
-
-        ServerSocket serverSocket = new ServerSocket(port);
+        ServerSocket serverSocket;
+        try {
+            serverSocket = new ServerSocket(Constants.PORT);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            return;
+        }
         System.out.println("El servidor s'està executant...");
         while (true) {
             System.out.println("Esperant connexions ...");
