@@ -3,7 +3,6 @@ package login.Client;
 import login.Exceptions.ConnectionErrorException;
 
 import java.io.*;
-import java.net.Socket;
 import java.util.List;
 
 public class Client {
@@ -11,10 +10,6 @@ public class Client {
 
     public static void main(String[] args) {
 
-        String host = "localhost";
-        int port = 9999;
-
-        String token;
         String comanda;
         LoginSession loginSession = null;
         while (true) {
