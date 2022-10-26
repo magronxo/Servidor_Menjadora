@@ -87,10 +87,28 @@ public class Simulador {
         }
     }
     
+    //Divideix el nombre de raccions entre 24 hores
+    public void reparteixRaccions(double raccions){
+        double tempsEntreRaccions = raccions / 24;
+        
+    }
+    
     public void mascotaMenja(Sensor plat, String nomMascota){
-        int quantitatMenjada = 5;
-        plat.setValorSimulador(plat.getValor() - quantitatMenjada);
-        System.out.println("La " + nomMascota +  " ha menjat " + quantitatMenjada + " grams");
+        int quantitatMenjada = 10;
+        if(plat.getValor() >0){
+            if(plat.getValor() < quantitatMenjada){
+                System.out.println("La " + nomMascota +  " ha menjat " + plat.getValor() + " grams");
+                plat.setValorSimulador(0);
+            }else{
+                plat.setValorSimulador(plat.getValor() - quantitatMenjada);
+                System.out.println("La " + nomMascota +  " ha menjat " + quantitatMenjada + " grams");
+            }
+        }else{
+            System.out.println("Plat buit, la mascota " + nomMascota +  " no ha menjat!");
+        }
+            
+            
+        
     }
     
     public void carregaDiposit(Sensor diposit){

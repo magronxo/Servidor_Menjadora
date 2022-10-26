@@ -20,10 +20,11 @@ import java.util.logging.Logger;
  */
 public class Servidor_Menjadora {
     
+    private static final int HORES_PER_EXECUCIO = 1; //Important! Configurar quantes hores es simulen per cada execució del programa
     private static int id = 1;
     private static boolean sortirPrograma = false;
     private static Maquina maquina;
-    private static int horesExecucio;
+    private static double horesExecucio;
 
 
     //CONSTRUCTORS
@@ -38,7 +39,7 @@ public class Servidor_Menjadora {
         return maquina;
     }
 
-    public static int getHoresExecucio() {
+    public static double getHoresExecucio() {
         return horesExecucio;
     }
     
@@ -76,7 +77,7 @@ public class Servidor_Menjadora {
         while(!sortirPrograma){
             for (Maquina maquina : maquines){
                 maquina.funcionamentMaquina();
-                horesExecucio++;
+                horesExecucio = horesExecucio + HORES_PER_EXECUCIO;
                 maquina.getControlador().escriuValorsGui();
                 System.out.println("\n\tSon les "+ horesExecucio);
                 if(horesExecucio >= 24){
@@ -85,7 +86,7 @@ public class Servidor_Menjadora {
                 }
             }
             try {
-                TimeUnit.SECONDS.sleep(1);     
+                TimeUnit.SECONDS.sleep(1);//Important! Definim el temps entre execucions del programa     
                 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Servidor_Menjadora.class.getName()).log(Level.SEVERE, null, ex);

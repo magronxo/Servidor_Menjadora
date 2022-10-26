@@ -313,7 +313,6 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         limitDiariDreta.getAccessibleContext().setAccessibleName("limitDiariDreta");
 
         acumulatGramsEsquerra.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
-        acumulatGramsEsquerra.setForeground(new java.awt.Color(0, 0, 0));
         acumulatGramsEsquerra.setText("200");
         acumulatGramsEsquerra.setToolTipText("");
         jPanel1.add(acumulatGramsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, 60));
@@ -327,14 +326,12 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         raccionsDreta.getAccessibleContext().setAccessibleName("raccionsDreta");
 
         acumulatRaccionsEsquerra.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
-        acumulatRaccionsEsquerra.setForeground(new java.awt.Color(0, 0, 0));
         acumulatRaccionsEsquerra.setText("2");
         acumulatRaccionsEsquerra.setToolTipText("");
         jPanel1.add(acumulatRaccionsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, 50));
         acumulatRaccionsEsquerra.getAccessibleContext().setAccessibleName("acumulatRaccionsEsquerra");
 
         gramsRaccioEsquerra.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
-        gramsRaccioEsquerra.setForeground(new java.awt.Color(0, 0, 0));
         gramsRaccioEsquerra.setText("22,22");
         gramsRaccioEsquerra.setToolTipText("");
         jPanel1.add(gramsRaccioEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, 70));
@@ -347,7 +344,6 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, 30));
 
         acumulatRaccionsDreta.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
-        acumulatRaccionsDreta.setForeground(new java.awt.Color(0, 0, 0));
         acumulatRaccionsDreta.setText("1");
         acumulatRaccionsDreta.setToolTipText("");
         jPanel1.add(acumulatRaccionsDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 240, -1, 50));
@@ -374,7 +370,6 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, -1, 40));
 
         acumulatGramsDreta.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
-        acumulatGramsDreta.setForeground(new java.awt.Color(0, 0, 0));
         acumulatGramsDreta.setText("200");
         acumulatGramsDreta.setToolTipText("");
         jPanel1.add(acumulatGramsDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, -1, 50));
@@ -402,7 +397,6 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 280, -1, 50));
 
         gramsRaccioDreta.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
-        gramsRaccioDreta.setForeground(new java.awt.Color(0, 0, 0));
         gramsRaccioDreta.setText("22,22");
         gramsRaccioDreta.setToolTipText("");
         jPanel1.add(gramsRaccioDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 270, -1, 70));
@@ -431,7 +425,6 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
         raccioExtraDreta.setBackground(new java.awt.Color(255, 153, 204));
         raccioExtraDreta.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        raccioExtraDreta.setForeground(new java.awt.Color(0, 0, 0));
         raccioExtraDreta.setText("RACCIÓ EXTRA");
         raccioExtraDreta.setActionCommand("RACCIÓ\nEXTRA");
         raccioExtraDreta.setAutoscrolls(true);
@@ -446,7 +439,6 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
         raccioExtraEsquerra.setBackground(new java.awt.Color(153, 153, 255));
         raccioExtraEsquerra.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        raccioExtraEsquerra.setForeground(new java.awt.Color(0, 0, 0));
         raccioExtraEsquerra.setText("RACCIÓ EXTRA");
         raccioExtraEsquerra.setActionCommand("RACCIÓ\nEXTRA");
         raccioExtraEsquerra.setAutoscrolls(true);
@@ -459,7 +451,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel1.add(raccioExtraEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 120, 60));
         raccioExtraEsquerra.getAccessibleContext().setAccessibleName("raccioExtraEsquerra");
 
-        fonsPantalla.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\Ensamblatge54projecte.JPG")); // NOI18N
+        fonsPantalla.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oriol\\Documents\\NetBeansProjects\\Servidor_Menjadora\\src\\main\\java\\gui\\view\\images\\Ensamblatge54projecte.JPG")); // NOI18N
         fonsPantalla.setAlignmentY(0.0F);
         fonsPantalla.setAutoscrolls(true);
         fonsPantalla.setFocusable(false);
