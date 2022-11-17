@@ -17,7 +17,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     
     //ArrayList<PropertyChangeListener> listeners = new ArrayList<PropertyChangeListener>();
     
-    private Menjadora menjadoraDreta, menjadoraEsquerra;
+    //private Menjadora menjadoraDreta, menjadoraEsquerra;
         /**
      * Creates new form Principal
      */
