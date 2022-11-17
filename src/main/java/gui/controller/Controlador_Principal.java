@@ -76,7 +76,7 @@ public class Controlador_Principal implements ActionListener {
         this.principal.getRaccionsDreta().setText(String.valueOf(this.menjadoraDreta.getLimitRaccionsDia()));
         this.principal.getRaccionsEsquerra().setText(String.valueOf(this.menjadoraEsquerra.getLimitRaccionsDia()));
         
-        this.principal.getHoraPantalla().setText(String.valueOf(Servidor_Menjadora.getHoresExecucio())+" hores");
+        this.principal.getHoraPantalla().setText(String.valueOf((int)Servidor_Menjadora.getHoresExecucio())+" hores");
         this.principal.getDiaMesHoraPantalla().setText(retornaDia());
         
         this.principal.progressBarDreta.setValue(((int)this.menjadoraDreta.getGramsAcumulatAvui()*100)/(int)this.menjadoraDreta.getLimitDiari());

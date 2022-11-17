@@ -6,6 +6,7 @@ package server.machine;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Timestamp;
 import server.machine.io.Simulador;
 import server.data.Dades;
 import server.machine.io.Actuador;
@@ -31,6 +32,7 @@ public class Menjadora {
     private int limitRaccionsDia, percentatgeAvui, raccionsAcumuladesAvui;
     private boolean dreta;
     private double gramsRaccio,horesEntreRaccions, gramsAcumulatAvui, limitDiari;
+    private Timestamp horaUltimaRaccio;
     
     private Mascota mascota;
     private Diposit diposit;
@@ -48,6 +50,7 @@ public class Menjadora {
         this.raccionsAcumuladesAvui=0;
         this.mascota = mascota;
         this.simulador=simulador;
+        this.horaUltimaRaccio = new Timestamp(System.currentTimeMillis());
     }
     
     public Menjadora(boolean dreta){
@@ -144,8 +147,8 @@ public class Menjadora {
      
         gramsRaccio = (double)limitDiari / limitRaccionsDia;
         horesEntreRaccions = (double)24 / limitRaccionsDia;
-        gramsRaccio = new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        horesEntreRaccions = new BigDecimal(horesEntreRaccions).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        /*gramsRaccio = (double)new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        horesEntreRaccions = (double)new BigDecimal(horesEntreRaccions).setScale(2, RoundingMode.HALF_UP).doubleValue();*/
         
         
         //gramsRaccio = limitDiari/limitRaccionsDia;
@@ -172,9 +175,21 @@ public class Menjadora {
     public void funciona(){
         if(this.raccionsAcumuladesAvui < this.limitRaccionsDia){
             //condicions per les quals activarem el procés de donar menjar
-            activaMotor(sensorPlat.getValor(), this.gramsRaccio);
-            this.raccionsAcumuladesAvui++;
-            System.out.println("\nHem servit "+ raccionsAcumuladesAvui + " raccions a " + mascota.getNom());
+            int horaSegons = 1; ///Important! Aquí definim quants segons dura una hora a la simulació. Al programa final posar 3600. 1/HORES_PER_SEGON
+            Timestamp horaActual = new Timestamp(System.currentTimeMillis());
+            Timestamp horesEntreRaccionsTs = new Timestamp((long)(horesEntreRaccions * horaSegons * 1000));
+            long debugHrAct = horaActual.getTime();
+            long debugHrUltRacc = horaUltimaRaccio.getTime();
+            long debugHrEntreRacc = horesEntreRaccionsTs.getTime();
+            if(horaActual.getTime() - horaUltimaRaccio.getTime() >= horesEntreRaccionsTs.getTime()){
+                activaMotor(sensorPlat.getValor(), this.gramsRaccio);
+                this.raccionsAcumuladesAvui++;
+                this.horaUltimaRaccio = horaActual;
+                System.out.println("\nHem servit "+ raccionsAcumuladesAvui + " raccions a " + mascota.getNom());
+            }else{
+                System.out.println("\nNo és hora de servir racció a "+ mascota.getNom());
+            }       
+            
             
             
         }else{
@@ -211,9 +226,7 @@ public class Menjadora {
         System.out.println("El sensor del diposit està "+ diposit.getSensorNivell().getValor() + "cm. del pinso.Esta buit??" + diposit.estaBuit());
     }
     
-    public void raccioExtra(double quantitatRacio){
-        activaMotor(sensorPlat.getValor(), quantitatRacio);
-    }
+
     
     public void aturaMotorPerPes(double pesInicial, double gramsRaccio){
         //Atura el motor quan arriba al pes de la Raccio
@@ -223,5 +236,8 @@ public class Menjadora {
         }         
     }
     
+    public void raccioExtra(double quantitatRacio){
+        activaMotor(sensorPlat.getValor(), quantitatRacio);
+    }
     
 }
