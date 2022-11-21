@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Client {
 
-
     public static void main(String[] args) {
 
         String comanda;
@@ -41,6 +40,18 @@ public class Client {
                         try {
                             List<String> resultat = Utilities.writeAndReadServer("check", loginSession.getToken());
                             System.out.println("L'usuari actual és: " + resultat.get(0));
+                        } catch (ConnectionErrorException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    break;
+                case "menjadora":
+                    if (loginSession == null) {
+                        System.out.println("Encara no has iniciat sessió!");
+                    } else {
+                        CMenjadora cMenjadora = new CMenjadora(loginSession);
+                        try {
+                            cMenjadora.runMenjadora();
                         } catch (ConnectionErrorException e) {
                             throw new RuntimeException(e);
                         }

@@ -32,6 +32,32 @@ public class Maquina {
     //CONSTRUCTORS
     public Maquina(){    
     }
+    /*public Maquina(int id) {
+        this.id=id;
+        this.mascotaDreta=mascotaDreta;
+        this.mascotaEsquerra=mascotaEsquerra;
+        Menjadora menjadoraDreta, menjadoraEsquerra;
+        Dades dadesDreta, dadesEsquerra;
+        Controlador_Principal controlador;
+
+        mascotaDreta = Mascota.addMascota(1);
+        mascotaEsquerra = Mascota.addMascota(2);
+
+        menjadoraDreta = Menjadora.addMenjadora(true, mascotaDreta);
+        menjadoraEsquerra = Menjadora.addMenjadora(false, mascotaEsquerra);
+
+        menjadoraDreta.setDosisDiaria(mascotaDreta.getGat(), mascotaDreta.getEdat(), mascotaDreta.getPesMascota());
+        menjadoraEsquerra.setDosisDiaria(mascotaEsquerra.getGat(), mascotaEsquerra.getEdat(), mascotaEsquerra.getPesMascota());
+
+        dadesDreta = new Dades().addDades(menjadoraDreta);
+        dadesEsquerra = new Dades().addDades(menjadoraEsquerra);
+
+        controlador = new Controlador_Principal().addControlador(menjadoraDreta, menjadoraEsquerra);
+        //controlador.setMenjadoraDreta(menjadoraDreta);
+        //controlador.setMenjadoraEsquerra(menjadoraEsquerra);
+
+        //return new Maquina(id, mascotaDreta, mascotaEsquerra, menjadoraDreta, menjadoraEsquerra, raccioExtra, dadesDreta, dadesEsquerra, controlador);
+    }*/
     public Maquina(int id, Mascota mascotaDreta, Mascota mascotaEsquerra, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra, int raccioExtra, Dades dadesDreta, Dades dadesEsquerra, Controlador_Principal controlador){
         this.id=id;
         this.mascotaDreta=mascotaDreta;

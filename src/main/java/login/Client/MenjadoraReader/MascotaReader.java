@@ -1,0 +1,19 @@
+package login.Client.MenjadoraReader;
+
+import server.machine.Mascota;
+
+public class MascotaReader {
+
+    String nom;
+    public MascotaReader () {
+
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+}

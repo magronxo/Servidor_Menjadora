@@ -24,6 +24,8 @@ public class Server {
     private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
     private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
 
+    SMenjadora sMenjadora = null;
+
     public static void main(String[] args) throws Exception {
 
         Server servidor = new Server();
@@ -76,6 +78,23 @@ public class Server {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "uf":
+                if (sMenjadora != null) {
+                    sendSocketOut(sMenjadora.firstUpdate());
+                } else {
+                    sMenjadora = new SMenjadora();
+                    sendSocketOut(sMenjadora.firstUpdate());
+                }
+                break;
+            case "u":
+                if (sMenjadora != null) {
+                    sendSocketOut("nu");
+                    //sendSocketOut(sMenjadora.update());
+                } else {
+                    sMenjadora = new SMenjadora();
+                    sendSocketOut(sMenjadora.firstUpdate());
+                }
+                break;
             case "logout":
                 System.out.println("Executant comanda de logout");
                 try {
@@ -96,7 +115,7 @@ public class Server {
 
     private void comprovaCaducitat(String token) {
         if (caducitatClients.containsKey(token)) {
-            if (System.currentTimeMillis() - caducitatClients.get(token) >= Constants.CADUCITAT_CLIENTS) {
+            if (System.currentTimeMillis() - caducitatClients.get(token) >= Constants.CADUCITAT_CLIENTS && Constants.CADUCITAT_CLIENTS != -1) {
                 loggedClients.remove(token);
                 caducitatClients.remove(token);
             }

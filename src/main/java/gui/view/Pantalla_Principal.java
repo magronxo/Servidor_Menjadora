@@ -459,7 +459,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel1.add(raccioExtraEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 120, 60));
         raccioExtraEsquerra.getAccessibleContext().setAccessibleName("raccioExtraEsquerra");
 
-        fonsPantalla.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\Ensamblatge54projecte.JPG")); // NOI18N
+        fonsPantalla.setIcon(new javax.swing.ImageIcon("D:\\SYNCFolders\\SYNCDocuments\\ideaProjects\\Servidor_Menjadora_Privat\\src\\main\\java\\gui\\view\\images\\Ensamblatge54projecte.JPG")); // NOI18N
         fonsPantalla.setAlignmentY(0.0F);
         fonsPantalla.setAutoscrolls(true);
         fonsPantalla.setFocusable(false);
