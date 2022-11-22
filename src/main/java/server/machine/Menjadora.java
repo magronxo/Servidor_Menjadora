@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
 import server.machine.io.Simulador;
-import server.data.Dades;
 import server.machine.io.Actuador;
 import server.machine.io.Sensor;
 
@@ -25,9 +24,7 @@ public class Menjadora {
     
     private static final int TIPUS_SENSOR = 1;
     private static final int KG_MARGE_PES = 1;
-    
-    
-    
+
     //VARIABLES
     private int limitRaccionsDia, percentatgeAvui, raccionsAcumuladesAvui;
     private boolean dreta;
@@ -64,8 +61,11 @@ public class Menjadora {
     public boolean isDreta() {
         return dreta;
     }
-
-
+    
+    public Actuador getMotorMenjadora() {
+        return motorMenjadora;
+    }
+    
     public int getLimitRaccionsDia() {
         return limitRaccionsDia;
     }
@@ -102,18 +102,38 @@ public class Menjadora {
         return sensorPlat;
     }
      
-
+    
+    //Pantalla Configuracio permet canviar aquest paràmetre
     public void setLimitDiari(int limitDiari){
-        //Pantalla Principal permet canviar aquest paràmetre
-        this.limitDiari = limitDiari;
+        //Control d'errors d'entrada
+        if(limitDiari > 0 && limitDiari < 1000){
+            this.limitDiari = limitDiari;
+        }else{
+            limitDiari = 160;
+        }
+        //Quan setejem limitDiari re-calculem els gramsRaccio i les hores entre raccions
+        calculaRaccio();
+        
+      
+        //gramsRaccio = (double)limitDiari / limitRaccionsDia;
+        //gramsRaccio = (double)new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
     
-    public void setRaccionsAlDia(int raccionsAlDia){
-        //Pantalla Principal permet canviar aquest paràmetre
-        this.limitRaccionsDia = raccionsAlDia;
+    //Pantalla Configuracio permet canviar aquest paràmetre
+    public void setRaccionsAlDia(int limitRaccionsDia){
+        //Control d'errors d'entrada
+        if(limitRaccionsDia > 0 && limitRaccionsDia < 48){
+            this.limitRaccionsDia = limitRaccionsDia;
+        }else{
+            limitRaccionsDia = 9;
+        }
+        //Quan setejem limitRaccionsDia re-calculem els gramsRaccio
+        calculaRaccio();
+        //gramsRaccio = (double)limitDiari / limitRaccionsDia;
+        //gramsRaccio = (double)new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
     
-    //METODES
+    //MÈTODES
     public static Menjadora addMenjadora(boolean dreta, Mascota mascota){
         Simulador simulador = new Simulador(dreta);
         Diposit diposit = new Diposit().addDiposit(simulador.retornaNivell());
@@ -144,35 +164,21 @@ public class Menjadora {
         }else if(pes > pesNormal+KG_MARGE_PES){
             limitDiari = limitDiari / 1.2;
         }
-     
-        gramsRaccio = (double)limitDiari / limitRaccionsDia;
-        horesEntreRaccions = (double)24 / limitRaccionsDia;
-        /*gramsRaccio = (double)new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        horesEntreRaccions = (double)new BigDecimal(horesEntreRaccions).setScale(2, RoundingMode.HALF_UP).doubleValue();*/
-        
-        
-        //gramsRaccio = limitDiari/limitRaccionsDia;
-        //horesEntreRaccions = 24.0/limitRaccionsDia;
 
-        //TAULA VETERINÀRIA
-        //Calcula limit diari
-        //Calcula raccions al dia
-        //Les posa directament a la pantalla
-        
-        //calculaRaccio();
+        calculaRaccio();
     }
     
     //En funció del limitDiari i les raccionsAlDia calcula els gramsRaccio i les horesEntreRaccions    
-    /*public static void calculaRaccio(){
+   public void calculaRaccio(){
         gramsRaccio = (double)limitDiari / limitRaccionsDia;
         horesEntreRaccions = (double)24 / limitRaccionsDia;
         gramsRaccio = new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
         horesEntreRaccions = new BigDecimal(horesEntreRaccions).setScale(2, RoundingMode.HALF_UP).doubleValue();  
-    }*/
+    }
 
     //------------  FUNCIONAMENT -----------
     
-    public void funciona(){
+    public void simulaFuncionament(){
         if(this.raccionsAcumuladesAvui < this.limitRaccionsDia){
             //condicions per les quals activarem el procés de donar menjar
             int horaSegons = 1; ///Important! Aquí definim quants segons dura una hora a la simulació. Al programa final posar 3600. 1/HORES_PER_SEGON
@@ -193,10 +199,19 @@ public class Menjadora {
             
             
         }else{
+            //Bloca el motor si ha assolit el limit de raccions;
             this.motorMenjadora.blocaRele();
         }
         simulador.mascotaMenja(sensorPlat, mascota.getNom());
         this.gramsAcumulatAvui+= gramsRaccio;
+        
+        //BLOCA-DESBLOCA MOTOR EN FUNCIÓ DEL NIVELL DEL DIPÒSIT
+        if(diposit.estaBuit()){
+            motorMenjadora.blocaRele();
+        }else if(simulador.carregaDiposit(dreta)){
+            System.out.println("El dipòsit de la "+diposit.stringDreta()+" ha estat emplenat");
+            motorMenjadora.desblocaRele();
+        }
     }
     public void resetejaDia(){
         this.raccionsAcumuladesAvui = 0;

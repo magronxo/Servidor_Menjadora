@@ -4,14 +4,12 @@
  */
 package gui.controller;
 
+import gui.view.Pantalla_Configuracio;
 import gui.view.Pantalla_Principal;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import server.machine.Menjadora;
 import server.Servidor_Menjadora;
-
 import java.text.Format;  
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
@@ -22,35 +20,54 @@ import java.util.Calendar;
  *
  * @author oriol
  */
-public class Controlador_Principal implements ActionListener {
+public class Controlador_Principal {
     
-    private Pantalla_Principal principal = new Pantalla_Principal();
-    private Menjadora menjadoraDreta, menjadoraEsquerra;
+    private static Pantalla_Principal principal;
+    //private Pantalla_Configuracio confScreen;
+    private static Controlador_Configuracio confControl;
+    private static Menjadora menjadoraDreta, menjadoraEsquerra;
     
-    
-    
-    /*public Controlador_Principal(Principal principal, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra){
+    //CONSTRUCTORS
+    public Controlador_Principal(Pantalla_Principal principal,Controlador_Configuracio configuracio, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra){
         this.principal=principal;
-        this.menjadoraDreta=menjadoraDreta;
-        this.menjadoraEsquerra=menjadoraEsquerra;
-        
-    }*/
-    public Controlador_Principal(Pantalla_Principal principal, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra){
-        this.principal=principal;
+        this.confControl=confControl;
         this.menjadoraDreta=menjadoraDreta;
         this.menjadoraEsquerra=menjadoraEsquerra;
         principal.setVisible(true);
     }
     public Controlador_Principal(){
         this.principal=null;
+        this.confControl=null;
         this.menjadoraDreta=null;
         this.menjadoraEsquerra=null;
     }
+    
+    //METODES
+    public static Controlador_Principal addControlador(Menjadora menjadoraDreta, Menjadora menjadoraEsquerra){
+
+        Pantalla_Configuracio confScreen = new Pantalla_Configuracio();      
+        Pantalla_Principal principal = new Pantalla_Principal(confScreen);
+        
+        confControl = new Controlador_Configuracio();
+        confControl.addControlador(confScreen, menjadoraDreta, menjadoraEsquerra);
+
+        return new Controlador_Principal(principal,confControl, menjadoraDreta, menjadoraEsquerra);
+    }
+
+    //FUNCIONS
     public void escriuValorsGui (){
         //Arrodonim els sensors a 2 decimals:
         double gramsPlatDreta = new BigDecimal(this.menjadoraDreta.getSensorPlat().getValor()).setScale(1, RoundingMode.HALF_UP).doubleValue();
         double gramsPlatEsquerra = new BigDecimal(this.menjadoraEsquerra.getSensorPlat().getValor()).setScale(1, RoundingMode.HALF_UP).doubleValue();
 
+        principal.getAlertaDipositDretaIcon().setVisible(false);
+        principal.getAlertaDipositEsquerraIcon().setVisible(false);
+        
+        principal.getSimulaMotorDretaIcon().setVisible(false);
+        principal.getSimulaMotorEsquerraIcon().setVisible(false);       
+        
+        principal.getBlockMotorDretaIcon().setVisible(false);
+        principal.getBlockMotorEsquerraIcon().setVisible(false);
         
         this.principal.getAcumulatGramsDreta().setText(String.valueOf((int)this.menjadoraDreta.getGramsAcumulatAvui()+" grams"));
         this.principal.getAcumulatGramsEsquerra().setText(String.valueOf((int)this.menjadoraEsquerra.getGramsAcumulatAvui()+" grams"));
@@ -63,6 +80,9 @@ public class Controlador_Principal implements ActionListener {
         
         this.principal.getGramsRaccioDreta().setText(String.valueOf(this.menjadoraDreta.getGramsRaccio()+" grams"));
         this.principal.getGramsRaccioEsquerra().setText(String.valueOf(this.menjadoraEsquerra.getGramsRaccio()+" grams"));
+        
+        this.principal.getHoresEntreRaccionsDreta().setText(String.valueOf(this.menjadoraDreta.getHoresEntreRaccions()));
+        this.principal.getHoresEntreRaccionsEsquerra().setText(String.valueOf(this.menjadoraEsquerra.getHoresEntreRaccions()));
         
         this.principal.getLimitDiariDreta().setText(String.valueOf((int)this.menjadoraDreta.getLimitDiari()+" grams"));
         this.principal.getLimitDiariEsquerra().setText(String.valueOf((int)this.menjadoraEsquerra.getLimitDiari()+" grams"));
@@ -81,64 +101,32 @@ public class Controlador_Principal implements ActionListener {
         
         this.principal.progressBarDreta.setValue(((int)this.menjadoraDreta.getGramsAcumulatAvui()*100)/(int)this.menjadoraDreta.getLimitDiari());
         this.principal.progressBarEsquerra.setValue(((int)this.menjadoraEsquerra.getGramsAcumulatAvui()*100)/(int)this.menjadoraEsquerra.getLimitDiari());
-
+        
     }
     
     public String retornaDia(){
-
-
         //returns a Calendar object whose calendar fields have been initialized with the current date and time  
         Calendar cal = Calendar.getInstance();  
-        //creating a constructor of the SimpleDateFormat class  
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");  
-        //getting current date  
-        //System.out.println("Today's date: "+sdf.format(cal.getTime()));  
-        //creating a constructor of the Format class  
-        //displaying full-day name  
         Format f = new SimpleDateFormat("EEEE");  
         String dia = f.format(new Date());  
-        //prints day name  
-        System.out.println("Day Name: "+dia);
         if(dia.equals("lunes"))dia="Dilluns";
         if(dia.equals("martes"))dia="Dimarts";
         if(dia.equals("miercoles"))dia="Dimecres";
         if(dia.equals("jueves"))dia="Dijous";
         if(dia.equals("viernes"))dia="Divendres";
         if(dia.equals("sabado"))dia="Dissabte";
-        if(dia.equals("domingo"))dia="Diumenge";
-   
+        if(dia.equals("domingo"))dia="Diumenge";   
         return dia+", "+sdf.format(cal.getTime());
     }
     
-    
-    /*public void setUp (){
-        this.principal.setVisible(true);
+    //ACCESSORS
+    public static Controlador_Configuracio getConfControl() {
+        return confControl;
+    }
 
-        this.principal.raccioExtraDreta.addActionListener(this);
-        
-        
-        //this.principal.nomMascotaDreta.enableInputMethods(true);
-        //this.principal.nomMascotaDreta.getAccessibleContext();
-        //this.principal.nomMascotaDreta.firePropertyChange("", 0, 0);
-        //this.principal.nomMascotaDreta.addAncestorListener((AncestorListener) this);
-        //this.principal.nomMascotaDreta.getAncestorListeners();
-        
-        //principal.limitDiariEsquerraPropertyChange(String.valueOf(this.menjadoraEsquerra.getLimitDiari()));
-        //principal.limitDiariEsquerraPropertyChange("");
-        
-        
-        //PropertyChangeListener[] listeners = new PropertyChangeListener[25];
-        //listeners = principal.getPropertyChangeListeners();
-        //System.out.println(listeners);
-        
-    }*/
-    public static Controlador_Principal addControlador(Menjadora menjadoraDreta, Menjadora menjadoraEsquerra){
-        //Principal principal ;
-        //Menjadora menjadoraDreta, menjadoraEsquerra;
-        Pantalla_Principal principal = new Pantalla_Principal();
-        //principal.canviaLimitDiariEsquerra("");
-        return new Controlador_Principal(principal, menjadoraDreta, menjadoraEsquerra);
-        //principal.setVisible(true);
+    public Pantalla_Principal getPrincipal() {
+        return principal;
     }
 
     public void setMenjadoraDreta(Menjadora menjadoraDreta) {
@@ -147,12 +135,5 @@ public class Controlador_Principal implements ActionListener {
 
     public void setMenjadoraEsquerra(Menjadora menjadoraEsquerra) {
         this.menjadoraEsquerra = menjadoraEsquerra;
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-    
-    
+    }   
 }

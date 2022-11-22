@@ -14,25 +14,74 @@ import server.machine.io.Sensor;
  */
 public class Diposit {
     
+    //CONSTANTS
     private final static int TIPUS_SENSOR = 2; //Sensor de nivell del dipòsit
     private final static double DIPOSIT_BUIT = 10.0; //Distànica sensor menjar que defineix dipòsit buit
-    private final static double ALERTA_DIPOSIT = 7.0;//Distància sensor menjar llença avís carregar dipòsit
-    private final static double DIPOSIT_PLE = 0.1;//Distància
+    private final static double DIPOSIT_PLE = 50.0;//Distància
     
     //VARIABLES
-    private int id;
+    private double valorAlertaDiposit = 20.0;//Distància sensor menjar llença avís carregar dipòsit
+    private static boolean dreta;
     private Sensor sensorNivell;
-
-    public Sensor getSensorNivell() {
-        return sensorNivell;
-    }
     private boolean alertaDiposit;
     
     //CONSTRUCTORS
-    public Diposit(Sensor sensorNivell){
+    public Diposit(Sensor sensorNivell, boolean dreta){
         this.sensorNivell=sensorNivell;
+        this.dreta=dreta;
     }
     public Diposit(){
+    }
+    
+    //ACCESSORS
+    public boolean isDreta(){
+        return dreta;
+    }
+    public String stringDreta(){
+       if(dreta){
+           return "dreta";
+       }else
+           return "esquerra";
+       
+    }
+    public Sensor getSensorNivell() {
+        return sensorNivell;
+    }
+
+    public double getValorAlertaDiposit() {
+        return valorAlertaDiposit;
+    }
+
+    public boolean isAlertaDiposit() {
+        return alertaDiposit;
+    }
+
+    public void setValorAlertaDiposit(double valorAlertaDiposit) {
+        if(valorAlertaDiposit > 15 && valorAlertaDiposit < 40){
+            this.valorAlertaDiposit = valorAlertaDiposit;
+        }else{
+            valorAlertaDiposit = 20;
+        }
+    }
+    
+    
+        //METODES
+    public static Diposit addDiposit(double valorSensor){
+        Sensor sensorNivell = new Sensor().addSensor(TIPUS_SENSOR, valorSensor);
+        return new Diposit(sensorNivell,dreta);
+    }
+    
+        //FUNCIONS
+    public double getPercentatgeDiposit(){
+        double percentatge = ((DIPOSIT_BUIT - sensorNivell.getValor())/DIPOSIT_BUIT) *100;
+        return percentatge; 
+    }
+
+    public void setAlertaDiposit(){
+        if(sensorNivell.getValor() > valorAlertaDiposit){
+            this.alertaDiposit = true;
+            //TODO   Activa la icona d'Alerta al Diposit
+        }
     }
     
     public Boolean estaBuit(){
@@ -40,23 +89,6 @@ public class Diposit {
             return true;
         }else{
            return false; 
-        }
-    }
-    
-    public double getPercentatgeDiposit(){
-        double percentatge = ((DIPOSIT_BUIT - sensorNivell.getValor())/DIPOSIT_BUIT) *100;
-        return percentatge; 
-    }
-    //METODES
-    public static Diposit addDiposit(double valorSensor){
-        Sensor sensorNivell = new Sensor().addSensor(TIPUS_SENSOR, valorSensor);
-        return new Diposit(sensorNivell);
-    }
-    
-    //FUNCIONS
-    public void setAlertaDiposit(){
-        if(sensorNivell.getValor() > ALERTA_DIPOSIT){
-            this.alertaDiposit = true;
         }
     }
     

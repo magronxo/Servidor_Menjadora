@@ -62,15 +62,6 @@ public class Simulador {
         return sensorNivell_dreta;
     }
     
-    
-    
-    //METODES
-    public static Simulador addSimulador(boolean dreta){
-        //int id,tipus;
-        return new Simulador(dreta);
-    }
-    
-    //FUNCIONS
     public double retornaNivell(){
         if(!dreta){
             return sensorNivell_esquerra;
@@ -87,6 +78,15 @@ public class Simulador {
         }
     }
     
+    
+    
+    //METODES
+    public static Simulador addSimulador(boolean dreta){
+        return new Simulador(dreta);
+    }
+    
+    //FUNCIONS
+
     //Divideix el nombre de raccions entre 24 hores
     public void reparteixRaccions(double raccions){
         double tempsEntreRaccions = raccions / 24;
@@ -95,7 +95,7 @@ public class Simulador {
     
     public void mascotaMenja(Sensor plat, String nomMascota){
         int quantitatMenjada = 10;
-        if(plat.getValor() >0){
+        if(plat.getValor() > 0){
             if(plat.getValor() < quantitatMenjada){
                 System.out.println("La " + nomMascota +  " ha menjat " + plat.getValor() + " grams");
                 plat.setValorSimulador(0);
@@ -111,7 +111,19 @@ public class Simulador {
         
     }
     
-    public void carregaDiposit(Sensor diposit){
-        
+    public boolean carregaDiposit(boolean dreta){
+        if (dreta){
+            sensorNivell_dreta = 50;
+        }else if (!dreta){
+            sensorNivell_esquerra = 50;
+        }
+        return true;
     }
+    
+    //TODO
+    //ajustar grams acumulats
+    //decrement del plat per fases
+    //ajustar decrement i emplenat del diposit
+    //Decimals grams/raccio
+    //Canvi de dia??? --> Guardar dia persistència -->InfluxDB
 }

@@ -16,13 +16,14 @@ import server.machine.Menjadora;
  * 
  * Classe que crea la Maquina. És cridat per Servidor_Menjadora.
  * Reb el id del Servidor_Menjadora.
- * Retorna una Màquina amb dues Mascotes.
+ * Retorna una Màquina amb dues Mascotes i dues Menjadores.
  * L'atribut raccioExtra és comú per a tota la Maquina.
  */
 public class Maquina {
     
     //VARIABLES
     private int id;
+    //private boolean dreta;
     private Mascota mascotaDreta, mascotaEsquerra;
     private static int raccioExtra = 10;
     private Menjadora menjadoraDreta, menjadoraEsquerra;
@@ -46,6 +47,7 @@ public class Maquina {
 
     public Menjadora getMenjadoraDreta() {
         return menjadoraDreta;
+        
     }
 
     public Menjadora getMenjadoraEsquerra() {
@@ -66,13 +68,14 @@ public class Maquina {
 
     //METODES
     public static Maquina addMaquina(int id){
+        
         Mascota mascotaDreta, mascotaEsquerra;
         Menjadora menjadoraDreta, menjadoraEsquerra;
         Dades dadesDreta, dadesEsquerra;
         Controlador_Principal controlador;
         
-        mascotaDreta = Mascota.addMascota(1);        
-        mascotaEsquerra = Mascota.addMascota(2);
+        mascotaDreta = Mascota.addMascota(true);        
+        mascotaEsquerra = Mascota.addMascota(false);
         
         menjadoraDreta = Menjadora.addMenjadora(true, mascotaDreta);
         menjadoraEsquerra = Menjadora.addMenjadora(false, mascotaEsquerra);
@@ -82,7 +85,9 @@ public class Maquina {
         
         dadesDreta = new Dades().addDades(menjadoraDreta);        
         dadesEsquerra = new Dades().addDades(menjadoraEsquerra);
-             
+        
+        
+        //Iniciem la Pantalla Principal
         controlador = new Controlador_Principal().addControlador(menjadoraDreta, menjadoraEsquerra);
         //controlador.setMenjadoraDreta(menjadoraDreta);
         //controlador.setMenjadoraEsquerra(menjadoraEsquerra);
@@ -91,8 +96,8 @@ public class Maquina {
     }
     
     public void funcionamentMaquina(){
-        menjadoraDreta.funciona();
-        menjadoraEsquerra.funciona();
+        menjadoraDreta.simulaFuncionament();
+        menjadoraEsquerra.simulaFuncionament();
     }
     public void resetejaDia(){
         //Creem DataBase (Org amb 2 buckets) quan l'usuari inicia sessio per primer cop
@@ -106,7 +111,17 @@ public class Maquina {
         
         menjadoraDreta.resetejaDia();
         menjadoraEsquerra.resetejaDia();
-        controlador.escriuValorsGui();
+        
+        
+        //controlador.escriuValorsGui();
+        
+        //DESBLOCA EL MOTOR SI EL DIPÒSTI NO ESTA BUIT
+        if(!menjadoraDreta.getDiposit().estaBuit()){
+            menjadoraDreta.getMotorMenjadora().desblocaRele();
+        }
+        if(!menjadoraEsquerra.getDiposit().estaBuit()){
+            menjadoraEsquerra.getMotorMenjadora().desblocaRele();
+        }
     }
     
     //FUNCIONS

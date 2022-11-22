@@ -4,62 +4,33 @@
  */
 package gui.view;
 
+import gui.controller.Controlador_Principal;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
-import server.machine.Menjadora;
 
 /**
  *
  * @author oriol
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
-    
-    //ArrayList<PropertyChangeListener> listeners = new ArrayList<PropertyChangeListener>();
-    
-    //private Menjadora menjadoraDreta, menjadoraEsquerra;
-        /**
-     * Creates new form Principal
-     */
+
+    private Pantalla_Configuracio confScreen; 
+     
     public Pantalla_Principal() {
         initComponents();
     }
-    
-    
-    
-    /*
-    public Pantalla_Principal(Menjadora menjadoraDreta, Menjadora menjadoraEsquerra){
+    public Pantalla_Principal(Pantalla_Configuracio confScreen) {
+        this.confScreen=confScreen;
         initComponents();
-        this.menjadoraDreta=menjadoraDreta;
-        this.menjadoraEsquerra=menjadoraEsquerra;
-
     }
-    
-    public static Pantalla_Principal addGui(){
-        return new Pantalla_Principal();
-    }
-    
-    
-    
-    
-    
-    
-    
-    
 
-        /**
+    /**
      * @param args the command line arguments
      * 
      */
     public static void main(String args[]) {
-        
-        
-        
-        
-        
-        //Servidor_Menjadora servidor = new Servidor_Menjadora();
-        
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -88,19 +59,10 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Pantalla_Principal().setVisible(true);
+                
+                
             }
-        });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //servidor.iniciaPrograma();
+        });        
         
     }
 
@@ -126,34 +88,39 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         raccionsEsquerra = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
         limitDiariDreta = new javax.swing.JLabel();
         acumulatGramsEsquerra = new javax.swing.JLabel();
         raccionsDreta = new javax.swing.JLabel();
         acumulatRaccionsEsquerra = new javax.swing.JLabel();
-        gramsRaccioEsquerra = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         acumulatRaccionsDreta = new javax.swing.JLabel();
         progressBarDreta = new javax.swing.JProgressBar();
-        jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         acumulatGramsDreta = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         nivellDipositDreta = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
         gramsRaccioDreta = new javax.swing.JLabel();
         gramsPlatDreta = new javax.swing.JLabel();
         gramsPlatEsquerra = new javax.swing.JLabel();
         nivellDipositEsquerra = new javax.swing.JLabel();
         raccioExtraDreta = new javax.swing.JButton();
         raccioExtraEsquerra = new javax.swing.JButton();
+        boto_configuracio = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        horesEntreRaccionsDreta = new javax.swing.JLabel();
+        gramsRaccioEsquerra = new javax.swing.JLabel();
+        horesEntreRaccionsEsquerra = new javax.swing.JLabel();
+        limitNivellDipositBuitLabel = new javax.swing.JLabel();
+        alertaDipositDretaIcon = new javax.swing.JLabel();
+        alertaDipositEsquerraIcon = new javax.swing.JLabel();
+        simulaMotorEsquerraIcon = new javax.swing.JLabel();
+        simulaMotorDretaIcon = new javax.swing.JLabel();
+        blockMotorEsquerraIcon = new javax.swing.JLabel();
+        blockMotorDretaIcon = new javax.swing.JLabel();
+        boto_estadistiques = new javax.swing.JButton();
         fonsPantalla = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -167,7 +134,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(51, 51, 255));
         jLabel7.setText("Raccions");
         jLabel7.setToolTipText("");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, 30));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, 30));
 
         horaPantalla.setFont(new java.awt.Font("Ink Free", 1, 54)); // NOI18N
         horaPantalla.setForeground(new java.awt.Color(0, 153, 153));
@@ -180,12 +147,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         limitDiariEsquerra.setForeground(new java.awt.Color(0, 153, 0));
         limitDiariEsquerra.setText("200");
         limitDiariEsquerra.setToolTipText("");
-        limitDiariEsquerra.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                limitDiariEsquerraPropertyChange(evt);
-            }
-        });
-        jPanel1.add(limitDiariEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, 40));
+        jPanel1.add(limitDiariEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, 40));
         limitDiariEsquerra.getAccessibleContext().setAccessibleName("limitDiariEsquerra");
 
         nomMascotaEsquerra.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
@@ -193,11 +155,6 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         nomMascotaEsquerra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nomMascotaEsquerra.setText("BONNIE");
         nomMascotaEsquerra.setToolTipText("");
-        nomMascotaEsquerra.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                nomMascotaEsquerraPropertyChange(evt);
-            }
-        });
         jPanel1.add(nomMascotaEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 230, -1));
         nomMascotaEsquerra.getAccessibleContext().setAccessibleName("nomMascotaEsquerra");
 
@@ -215,11 +172,6 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         nomMascotaDreta.setToolTipText("");
         nomMascotaDreta.setFocusable(false);
         nomMascotaDreta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        nomMascotaDreta.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                nomMascotaDretaVetoableChange(evt);
-            }
-        });
         jPanel1.add(nomMascotaDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 250, -1));
         nomMascotaDreta.getAccessibleContext().setAccessibleName("");
 
@@ -229,33 +181,26 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         progressBarEsquerra.setFocusTraversalPolicyProvider(true);
         progressBarEsquerra.setOpaque(true);
         progressBarEsquerra.setStringPainted(true);
-        jPanel1.add(progressBarEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 290, -1));
+        jPanel1.add(progressBarEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 290, 30));
         progressBarEsquerra.getAccessibleContext().setAccessibleName("barAcumulatEsquerra");
 
         jLabel13.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 255));
         jLabel13.setText("Acumulat Avui");
         jLabel13.setToolTipText("");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel14.setText("Limit Diàri");
+        jLabel14.setText("Límit Diari");
         jLabel14.setToolTipText("");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel15.setText("Limit Diàri");
+        jLabel15.setText("Límit Diari");
         jLabel15.setToolTipText("");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 120, -1, 30));
-
-        jLabel16.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel16.setText("g.");
-        jLabel16.setToolTipText("");
-        jLabel16.setEnabled(false);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, 40));
 
         jLabel17.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(51, 51, 255));
@@ -267,43 +212,8 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         raccionsEsquerra.setForeground(new java.awt.Color(0, 153, 0));
         raccionsEsquerra.setText("7");
         raccionsEsquerra.setToolTipText("");
-        jPanel1.add(raccionsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, -1, 50));
+        jPanel1.add(raccionsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, 50));
         raccionsEsquerra.getAccessibleContext().setAccessibleName("raccionsEsquerra");
-
-        jLabel19.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel19.setText("g.");
-        jLabel19.setToolTipText("");
-        jLabel19.setEnabled(false);
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, 40));
-
-        jLabel20.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel20.setText("g.");
-        jLabel20.setToolTipText("");
-        jLabel20.setEnabled(false);
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 160, -1, 30));
-
-        jLabel21.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel21.setText("de");
-        jLabel21.setToolTipText("");
-        jLabel21.setEnabled(false);
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, 40));
-
-        jLabel23.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel23.setText("g.");
-        jLabel23.setToolTipText("");
-        jLabel23.setEnabled(false);
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, 50));
-
-        jLabel24.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel24.setText("g.");
-        jLabel24.setToolTipText("");
-        jLabel24.setEnabled(false);
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 120, -1, 30));
 
         limitDiariDreta.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         limitDiariDreta.setForeground(new java.awt.Color(0, 153, 0));
@@ -315,7 +225,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         acumulatGramsEsquerra.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         acumulatGramsEsquerra.setText("200");
         acumulatGramsEsquerra.setToolTipText("");
-        jPanel1.add(acumulatGramsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, 60));
+        jPanel1.add(acumulatGramsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, 60));
         acumulatGramsEsquerra.getAccessibleContext().setAccessibleName("acumulatGramsEsquerra");
 
         raccionsDreta.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
@@ -328,20 +238,14 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         acumulatRaccionsEsquerra.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
         acumulatRaccionsEsquerra.setText("2");
         acumulatRaccionsEsquerra.setToolTipText("");
-        jPanel1.add(acumulatRaccionsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, 50));
+        jPanel1.add(acumulatRaccionsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, -1, 50));
         acumulatRaccionsEsquerra.getAccessibleContext().setAccessibleName("acumulatRaccionsEsquerra");
-
-        gramsRaccioEsquerra.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
-        gramsRaccioEsquerra.setText("22,22");
-        gramsRaccioEsquerra.setToolTipText("");
-        jPanel1.add(gramsRaccioEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, 70));
-        gramsRaccioEsquerra.getAccessibleContext().setAccessibleName("gramsRaccioEsquerra");
 
         jLabel30.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel30.setText("Grams/Racció");
+        jLabel30.setText("Hores entre raccions");
         jLabel30.setToolTipText("");
-        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, 30));
+        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, 40));
 
         acumulatRaccionsDreta.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
         acumulatRaccionsDreta.setText("1");
@@ -353,15 +257,8 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         progressBarDreta.setDoubleBuffered(true);
         progressBarDreta.setOpaque(true);
         progressBarDreta.setStringPainted(true);
-        jPanel1.add(progressBarDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 290, -1));
+        jPanel1.add(progressBarDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 290, 30));
         progressBarDreta.getAccessibleContext().setAccessibleName("barAcumulatDreta");
-
-        jLabel33.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel33.setText("de");
-        jLabel33.setToolTipText("");
-        jLabel33.setEnabled(false);
-        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 250, -1, 40));
 
         jLabel34.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(51, 51, 255));
@@ -379,22 +276,15 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jLabel36.setForeground(new java.awt.Color(51, 51, 255));
         jLabel36.setText("Grams/Racció");
         jLabel36.setToolTipText("");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, -1, 30));
+        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, -1, 40));
 
         nivellDipositDreta.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         nivellDipositDreta.setForeground(new java.awt.Color(51, 51, 255));
         nivellDipositDreta.setText("36,5 cm.");
-        nivellDipositDreta.setToolTipText("");
+        nivellDipositDreta.setToolTipText("Distància restant de pinso");
         nivellDipositDreta.setName(""); // NOI18N
         jPanel1.add(nivellDipositDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, -1, 70));
         nivellDipositDreta.getAccessibleContext().setAccessibleName("nivellDipositDreta");
-
-        jLabel38.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel38.setText("g.");
-        jLabel38.setToolTipText("");
-        jLabel38.setEnabled(false);
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 280, -1, 50));
 
         gramsRaccioDreta.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
         gramsRaccioDreta.setText("22,22");
@@ -419,13 +309,14 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         nivellDipositEsquerra.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         nivellDipositEsquerra.setForeground(new java.awt.Color(51, 51, 255));
         nivellDipositEsquerra.setText("40 cm.");
-        nivellDipositEsquerra.setToolTipText("");
+        nivellDipositEsquerra.setToolTipText("Distància restant de pinso");
         nivellDipositEsquerra.setName(""); // NOI18N
-        jPanel1.add(nivellDipositEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, -1, 70));
+        jPanel1.add(nivellDipositEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, -1, 70));
 
         raccioExtraDreta.setBackground(new java.awt.Color(255, 153, 204));
         raccioExtraDreta.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         raccioExtraDreta.setText("RACCIÓ EXTRA");
+        raccioExtraDreta.setToolTipText("Força la racció, encara que el motor estigui blocat");
         raccioExtraDreta.setActionCommand("RACCIÓ\nEXTRA");
         raccioExtraDreta.setAutoscrolls(true);
         raccioExtraDreta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 153), 3, true));
@@ -440,6 +331,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         raccioExtraEsquerra.setBackground(new java.awt.Color(153, 153, 255));
         raccioExtraEsquerra.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         raccioExtraEsquerra.setText("RACCIÓ EXTRA");
+        raccioExtraEsquerra.setToolTipText("Força la racció, encara que el motor estigui blocat");
         raccioExtraEsquerra.setActionCommand("RACCIÓ\nEXTRA");
         raccioExtraEsquerra.setAutoscrolls(true);
         raccioExtraEsquerra.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 255), 3, true));
@@ -451,7 +343,85 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel1.add(raccioExtraEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 120, 60));
         raccioExtraEsquerra.getAccessibleContext().setAccessibleName("raccioExtraEsquerra");
 
-        fonsPantalla.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oriol\\Documents\\NetBeansProjects\\Servidor_Menjadora\\src\\main\\java\\gui\\view\\images\\Ensamblatge54projecte.JPG")); // NOI18N
+        boto_configuracio.setBackground(new java.awt.Color(102, 102, 102));
+        boto_configuracio.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\gears.png")); // NOI18N
+        boto_configuracio.setToolTipText("Modifica els paràmetres de les Mascotes o les Menjadores");
+        boto_configuracio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boto_configuracioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(boto_configuracio, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 550, 80, 70));
+
+        jLabel31.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel31.setText("Hores entre raccions");
+        jLabel31.setToolTipText("");
+        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 330, -1, 40));
+
+        jLabel32.setFont(new java.awt.Font("Noto Mono", 1, 18)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel32.setText("Grams/Racció");
+        jLabel32.setToolTipText("");
+        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 40));
+
+        horesEntreRaccionsDreta.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
+        horesEntreRaccionsDreta.setText("2.6");
+        horesEntreRaccionsDreta.setToolTipText("");
+        jPanel1.add(horesEntreRaccionsDreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 310, -1, 70));
+
+        gramsRaccioEsquerra.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
+        gramsRaccioEsquerra.setText("22,22");
+        gramsRaccioEsquerra.setToolTipText("");
+        jPanel1.add(gramsRaccioEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, -1, 70));
+
+        horesEntreRaccionsEsquerra.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
+        horesEntreRaccionsEsquerra.setText("2.6");
+        horesEntreRaccionsEsquerra.setToolTipText("");
+        jPanel1.add(horesEntreRaccionsEsquerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, -1, 70));
+
+        limitNivellDipositBuitLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        limitNivellDipositBuitLabel.setForeground(new java.awt.Color(204, 0, 102));
+        limitNivellDipositBuitLabel.setText("10 cm.");
+        limitNivellDipositBuitLabel.setToolTipText("Nivell restant de pinso en que es blocarà el motor fins que no es torni a omplir el dipòsit. Prémer RACCIÓ EXTRA per forçar el motor ");
+        limitNivellDipositBuitLabel.setName(""); // NOI18N
+        jPanel1.add(limitNivellDipositBuitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 330, 60, 60));
+
+        alertaDipositDretaIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\appbar.shield_w.alert.png")); // NOI18N
+        alertaDipositDretaIcon.setText("jLabel5");
+        jPanel1.add(alertaDipositDretaIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 70, -1));
+
+        alertaDipositEsquerraIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\appbar.shield_w.alert.png")); // NOI18N
+        alertaDipositEsquerraIcon.setText("jLabel6");
+        jPanel1.add(alertaDipositEsquerraIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 70, 60));
+
+        simulaMotorEsquerraIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\appbar.transform.rotateb.clockwise.png")); // NOI18N
+        simulaMotorEsquerraIcon.setText("jLabel8");
+        jPanel1.add(simulaMotorEsquerraIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 80, 60));
+
+        simulaMotorDretaIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\appbar.transform.rotate.counterclockwiseb.png")); // NOI18N
+        simulaMotorDretaIcon.setText("jLabel9");
+        jPanel1.add(simulaMotorDretaIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 70, 60));
+
+        blockMotorEsquerraIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\red-cross-icon.png")); // NOI18N
+        blockMotorEsquerraIcon.setText("jLabel10");
+        jPanel1.add(blockMotorEsquerraIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, -1, -1));
+
+        blockMotorDretaIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\red-cross-icon.png")); // NOI18N
+        blockMotorDretaIcon.setText("jLabel11");
+        jPanel1.add(blockMotorDretaIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, -1, -1));
+
+        boto_estadistiques.setBackground(new java.awt.Color(102, 102, 102));
+        boto_estadistiques.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\appbar.graph.line.up.png")); // NOI18N
+        boto_estadistiques.setToolTipText("Consulta les estadístiques de la Màquina");
+        boto_estadistiques.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boto_estadistiquesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(boto_estadistiques, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 550, 80, 70));
+
+        fonsPantalla.setIcon(new javax.swing.ImageIcon("C:\\Users\\oriol\\OneDrive\\Documents\\NetBeansProjects\\Servidor_Menjadora4\\src\\main\\java\\gui\\view\\images\\Ensamblatge54projecte.JPG")); // NOI18N
         fonsPantalla.setAlignmentY(0.0F);
         fonsPantalla.setAutoscrolls(true);
         fonsPantalla.setFocusable(false);
@@ -469,31 +439,32 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     private void raccioExtraDretaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raccioExtraDretaActionPerformed
         // TODO add your handling code here:
+        
+        
+        
+        
     }//GEN-LAST:event_raccioExtraDretaActionPerformed
 
     private void raccioExtraEsquerraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raccioExtraEsquerraActionPerformed
         // TODO add your handling code here:
+        
+        
+        
+        
     }//GEN-LAST:event_raccioExtraEsquerraActionPerformed
 
-    private void limitDiariEsquerraPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_limitDiariEsquerraPropertyChange
-        // TODO add your handling code here:       
-    }//GEN-LAST:event_limitDiariEsquerraPropertyChange
-
-    private void nomMascotaEsquerraPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_nomMascotaEsquerraPropertyChange
+    private void boto_configuracioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boto_configuracioActionPerformed
         // TODO add your handling code here:
-        //nomMascotaEsquerra.setText(this.menjadoraEsquerra.getMascota().getNom());
-    }//GEN-LAST:event_nomMascotaEsquerraPropertyChange
+        confScreen.setVisible(true);
+        confScreen.getConfControl().setejaPantallaConfiguracio();
+        //this.setVisible(false);
+    }//GEN-LAST:event_boto_configuracioActionPerformed
 
-    private void nomMascotaDretaVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_nomMascotaDretaVetoableChange
+    private void boto_estadistiquesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boto_estadistiquesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomMascotaDretaVetoableChange
+    }//GEN-LAST:event_boto_estadistiquesActionPerformed
 
-    
-    
-    
-        //ACCESSORS
-    
-    //GETTERS
+    //GETTERS   
     public JLabel getAcumulatGramsDreta() {
         return acumulatGramsDreta;
     }
@@ -581,6 +552,38 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     public JLabel getRaccionsEsquerra() {
         return raccionsEsquerra;
     }
+
+    public JLabel getHoresEntreRaccionsDreta() {
+        return horesEntreRaccionsDreta;
+    }
+
+    public JLabel getHoresEntreRaccionsEsquerra() {
+        return horesEntreRaccionsEsquerra;
+    }
+
+    public static JLabel getAlertaDipositDretaIcon() {
+        return alertaDipositDretaIcon;
+    }
+
+    public static JLabel getAlertaDipositEsquerraIcon() {
+        return alertaDipositEsquerraIcon;
+    }
+
+    public JLabel getSimulaMotorDretaIcon() {
+        return simulaMotorDretaIcon;
+    }
+
+    public JLabel getSimulaMotorEsquerraIcon() {
+        return simulaMotorEsquerraIcon;
+    }
+
+    public JLabel getBlockMotorDretaIcon() {
+        return blockMotorDretaIcon;
+    }
+
+    public JLabel getBlockMotorEsquerraIcon() {
+        return blockMotorEsquerraIcon;
+    }
     
 
 
@@ -589,6 +592,12 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     public javax.swing.JLabel acumulatGramsEsquerra;
     public javax.swing.JLabel acumulatRaccionsDreta;
     public javax.swing.JLabel acumulatRaccionsEsquerra;
+    private static javax.swing.JLabel alertaDipositDretaIcon;
+    private static javax.swing.JLabel alertaDipositEsquerraIcon;
+    private javax.swing.JLabel blockMotorDretaIcon;
+    private javax.swing.JLabel blockMotorEsquerraIcon;
+    public javax.swing.JButton boto_configuracio;
+    public javax.swing.JButton boto_estadistiques;
     public javax.swing.JLabel diaMesHoraPantalla;
     private javax.swing.JLabel fonsPantalla;
     public javax.swing.JLabel gramsPlatDreta;
@@ -596,25 +605,22 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     public javax.swing.JLabel gramsRaccioDreta;
     public javax.swing.JLabel gramsRaccioEsquerra;
     public javax.swing.JLabel horaPantalla;
+    public javax.swing.JLabel horesEntreRaccionsDreta;
+    public javax.swing.JLabel horesEntreRaccionsEsquerra;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JLabel limitDiariDreta;
     public javax.swing.JLabel limitDiariEsquerra;
+    public javax.swing.JLabel limitNivellDipositBuitLabel;
     public javax.swing.JLabel nivellDipositDreta;
     public javax.swing.JLabel nivellDipositEsquerra;
     public javax.swing.JLabel nomMascotaDreta;
@@ -625,5 +631,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     public javax.swing.JButton raccioExtraEsquerra;
     public javax.swing.JLabel raccionsDreta;
     public javax.swing.JLabel raccionsEsquerra;
+    private javax.swing.JLabel simulaMotorDretaIcon;
+    private javax.swing.JLabel simulaMotorEsquerraIcon;
     // End of variables declaration//GEN-END:variables
 }

@@ -49,23 +49,5 @@ public class Sensor {
         
         this.valor = valor;
 
-    }
-    
-    
-   /* public static double llegeixValor(int tipus){
-        
-                double valorSensor=99.9f;
-                switch (tipus) {
-                    case 1://tipus sensor
-                        //valorSensor = ;//substituir per funció del sensor que llegeixi
-                        break;
-                    case 2:
-                        valorSensor = Simulador.sensorNivell;
-                        break;
-                }
-        }
-
-    return valorSensor;
-    }*/
-    
+    } 
 }

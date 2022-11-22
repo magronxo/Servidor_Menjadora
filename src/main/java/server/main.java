@@ -4,7 +4,7 @@
  */
 package server;
 
-import gui.view.Pantalla_Principal;
+import gui.controller.Controlador_Principal;
 import javax.swing.SwingUtilities;
 
 /**
@@ -16,7 +16,7 @@ public class main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Pantalla_Principal gui = new Pantalla_Principal();
+                Controlador_Principal controlador = new Controlador_Principal();
             }
         });
     }

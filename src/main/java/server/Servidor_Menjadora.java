@@ -45,29 +45,9 @@ public class Servidor_Menjadora {
     
     //-------   MAIN ---------
     public static void main(String[] args) {
-    //public void iniciaPrograma(){
-        //Reb la connexió
-        //Registra el compte -->Pantalla
-        //Crea una màquina per al compte registrat
-        
-        //Autentica l'usuari -->Pantalla
-        //Logout -->Pantalla
-        
-        //Canvi de contrasenya -->Pantalla
-        //Esborra el compte -->Pantalla
-        
-        //DESENVOLUPADORS
-        //Llistat de comptes? -->Consola
-        
-        //arrays de maquines i comptes
-        //ArrayList<Compte> comptes = new ArrayList<Compte>();
-        
-        
-        
-        
+           
         ArrayList<Maquina> maquines = new ArrayList<Maquina>();
         
-        //Compte compte = new Compte();
         maquina = new Maquina();
         maquines.add(maquina.addMaquina(1));
         horesExecucio = 0;
