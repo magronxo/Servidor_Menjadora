@@ -22,9 +22,18 @@ public class Actuador {
     public Actuador(){
     }
     
-    //METODES
-    public static Actuador addMotor(){
+
+    //ACCESSORS
+    public boolean isInterruptor(){    
         
+        return interruptor;
+    }
+    public boolean isBlock() {    
+        return block;
+    }
+
+    //METODES
+    public static Actuador addMotor() {
         return new Actuador();
     }
     

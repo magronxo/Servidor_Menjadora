@@ -4,8 +4,6 @@
  */
 package server.machine.io;
 
-import server.Simulador;
-
 /**
  *
  * @author oriol
@@ -20,6 +18,8 @@ public class Sensor {
     private boolean dreta;
     private int tipus;//Sensor de nivell o Sensor de pes del plat
     private double valor;
+
+
     
     
     //CONSTRUCTORS
@@ -30,7 +30,11 @@ public class Sensor {
     public Sensor(){
     }
     
+    //ACCESSORS
     
+    public double getValor() {
+        return valor;
+    }
     //METODES
     public static Sensor addSensor(int tipus, double valor){
         //int id,tipus;
@@ -38,33 +42,12 @@ public class Sensor {
         
         return new Sensor(tipus, valor);
     }
-    
-    public double getValor(){
-        return this.valor;
-    }
+
     
     //FUNCIONS
     public void setValorSimulador(double valor){
         
         this.valor = valor;
 
-    }
-    
-    
-   /* public static double llegeixValor(int tipus){
-        
-                double valorSensor=99.9f;
-                switch (tipus) {
-                    case 1://tipus sensor
-                        //valorSensor = ;//substituir per funció del sensor que llegeixi
-                        break;
-                    case 2:
-                        valorSensor = Simulador.sensorNivell;
-                        break;
-                }
-        }
-
-    return valorSensor;
-    }*/
-    
+    } 
 }

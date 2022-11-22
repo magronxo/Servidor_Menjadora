@@ -13,10 +13,17 @@ import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.InfluxDBClientFactory;
 import com.influxdb.client.QueryApi;
 import com.influxdb.client.WriteApiBlocking;
+import com.influxdb.client.domain.Authorization;
+import com.influxdb.client.domain.Bucket;
+import com.influxdb.client.domain.BucketRetentionRules;
+import com.influxdb.client.domain.Organization;
+import com.influxdb.client.domain.Permission;
+import com.influxdb.client.domain.PermissionResource;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
+import java.util.Arrays;
 import server.machine.Menjadora;
 
 /**
@@ -53,6 +60,8 @@ public class Dades {
     }
     
     //FUNCIONS
+    
+    
     public void escriuDades(double gramsAcumulatAvui){
         
         InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org, bucket);

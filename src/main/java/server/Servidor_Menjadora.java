@@ -5,12 +5,11 @@
 
 package server;
 
-import session.Compte;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static server.Maquina.addMaquina;
 
 /**
  *
@@ -21,42 +20,45 @@ import static server.Maquina.addMaquina;
  */
 public class Servidor_Menjadora {
     
+    private static final int HORES_PER_EXECUCIO = 1; //Important! Configurar quantes hores es simulen per cada execució del programa
     private static int id = 1;
     private static boolean sortirPrograma = false;
+    private static Maquina maquina;
+    private static double horesExecucio;
 
 
-    //CONSTRUCTOR
+    //CONSTRUCTORS
     public Servidor_Menjadora(int id){
         this.id=id;
     }
+    public Servidor_Menjadora(){
+    }
+    
+    //ACCESSORS
+    public static Maquina getMaquina() {
+        return maquina;
+    }
 
+    public static double getHoresExecucio() {
+        return horesExecucio;
+    }
+    
+    //-------   MAIN ---------
     public static void main(String[] args) {
-
-        //Reb la connexió
-        //Registra el compte -->Pantalla
-        //Crea una màquina per al compte registrat
-        
-        //Autentica l'usuari -->Pantalla
-        //Logout -->Pantalla
-        
-        //Canvi de contrasenya -->Pantalla
-        //Esborra el compte -->Pantalla
-        
-        //DESENVOLUPADORS
-        //Llistat de comptes? -->Consola
-        
-        //arrays de maquines i comptes
-        //ArrayList<Compte> comptes = new ArrayList<Compte>();
+           
         ArrayList<Maquina> maquines = new ArrayList<Maquina>();
         
-        //Compte compte = new Compte();
+        maquina = new Maquina();
+        maquines.add(maquina.addMaquina(1));
+        horesExecucio = 0;
         
-        maquines.add(new Maquina().addMaquina(1));
-        int horesExecucio = 0;
+        
+        
         while(!sortirPrograma){
             for (Maquina maquina : maquines){
                 maquina.funcionamentMaquina();
-                horesExecucio++;
+                horesExecucio = horesExecucio + HORES_PER_EXECUCIO;
+                maquina.getControlador().escriuValorsGui();
                 System.out.println("\n\tSon les "+ horesExecucio);
                 if(horesExecucio >= 24){
                     maquina.resetejaDia();
@@ -64,7 +66,7 @@ public class Servidor_Menjadora {
                 }
             }
             try {
-                TimeUnit.SECONDS.sleep(1);     
+                TimeUnit.SECONDS.sleep(1);//Important! Definim el temps entre execucions del programa     
                 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Servidor_Menjadora.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,4 +74,6 @@ public class Servidor_Menjadora {
         }
         
     }
+
+
 }

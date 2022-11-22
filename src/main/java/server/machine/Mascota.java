@@ -18,22 +18,20 @@ import server.machine.Menjadora;
  */
 public class Mascota {
     
-    public final static Scanner DADES = new Scanner(System.in);
+    //public final static Scanner DADES = new Scanner(System.in);
     
     //VARIABLES
-    private String nom;
-    private int id;
-    private boolean gat;
-
-    
-    private int edat;
-    private float pesMascota;
+    private String nom = "nom Mascota";
+    private boolean dreta;
+    private boolean gat = true;
+    private int edat = 2;
+    private double pesMascota = 4.0;
     
     //CONSTRUCTORS
-    public Mascota(int id,String nom, String gatGos, int edat, float pesMascota){
-        this.id=id;
+    public Mascota(boolean dreta,String nom, boolean gat, int edat, double pesMascota){
+        this.dreta=dreta;
         this.nom=nom;
-        if(gatGos.equalsIgnoreCase("gat") || gatGos.equalsIgnoreCase("1")){
+        if(gat){
             this.gat = true;
         }else{
             this.gat = false;
@@ -41,61 +39,95 @@ public class Mascota {
         this.edat=edat;
         this.pesMascota=pesMascota; 
     }
+    public Mascota(boolean dreta){
+        this.dreta=dreta;
+    }
     
     //ACCESSORS
     public String getNom() {
         return nom;
     }
+    public String stringDreta() {
+        if(dreta){
+            return "dreta";
+        }else{
+           return "esquerra"; 
+        }
+    }
     
     public boolean getGat() {
         return gat;
     }
-       
-    
-    //METODES
-    public static Mascota addMascota(int id){
 
-        String nom;
-        //Boolean gatGos;
-        String gatGos;
-        int edat;
-        float pesMascota;
-        Menjadora menjadora;
-        
-        //Demana nom, gat/gos, edat i pes de la Mascota
-        System.out.println("MASCOTA ID -->"+ id);
-        System.out.println("Nom de la mascota?");
-        nom = DADES.next();
-        System.out.println("Gat o gos?");
-        gatGos = DADES.next();
-        System.out.println("Edat?");
-        edat = DADES.nextInt();
-        System.out.println("Pes?");
-        pesMascota = DADES.nextFloat();
-                
-        return new Mascota(id, nom, gatGos, edat, pesMascota);
+    public boolean isDreta() {
+        return dreta;
     }
 
+    public boolean isGat() {
+        return gat;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setGat(String gat) {
+        //Control d'errors d'entrada
+        if(gat.equalsIgnoreCase("gat")){
+            this.gat=true;
+        }else{
+            this.gat=false;
+        }
+    }
+
+    public void setEdat(int edat) {
+        //Control d'errors d'entrada
+        if(edat > 0 && edat < 100){
+            this.edat=edat;
+        }else{
+            edat = 2;
+        }
+    }
+
+    public void setPesMascota(double pesMascota) {
+        //Control d'errors d'entrada
+        if(pesMascota > 0 && pesMascota < 100){
+            this.pesMascota=pesMascota;
+        }else{
+            pesMascota = 4.0;
+        }
+    }
+    
     public int getEdat() {
         return edat;
     }
 
-    public float getPesMascota() {
+    public double getPesMascota() {
         return pesMascota;
+    }   
+    
+    //METODES
+    public static Mascota addMascota(boolean dreta){
+        
+        return new Mascota(dreta);
     }
 
-    
-    public void esborraMascota(){
-        //per a poder crear una de nova al lloc de l'esborrada
+    public void actualitzaMascota(String nom, boolean gat, int edat, double pesMascota){
+        this.nom=nom;
+        this.gat=gat;
+        //Controls d'errors d'entrada        
+        if(edat > 0 && edat < 100){
+            this.edat=edat;
+        }else{
+            edat = 2;
+        }
+        
+        if(pesMascota > 0 && pesMascota < 100){
+            this.pesMascota=pesMascota;
+        }else{
+            pesMascota = 4.0;
+        }
+        
     }
-    
-    ///////////GUI
-    /*Pantalla configuració Mascota
-    Es demana quan s'accedeix per primer cop i es pot modificar
-    - Es demana les variables de la classe
-    - Botons Cancela, Esborra i Accepta
-    - Botó accepta calcula, introdueix i informa de que s'han inserit els paràmetres recomanats i que es poden modificar.
-        **El limitDiari i raccionsAlDia es podran modificar a la Pantalla Principal**
-    */
-    
+
 }

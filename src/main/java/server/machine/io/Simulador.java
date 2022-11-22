@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package server;
+package server.machine.io;
 
 import server.machine.Mascota;
 import server.machine.io.Sensor;
@@ -20,8 +20,6 @@ public class Simulador {
     public double sensorPlat_dreta = 20.1;
     public double sensorNivell_esquerra = 2;
     public double sensorNivell_dreta = 2;
-    
- 
     
     //CONSTRUCTORS
     public Simulador(boolean dreta){
@@ -64,15 +62,6 @@ public class Simulador {
         return sensorNivell_dreta;
     }
     
-    
-    
-    //METODES
-    public static Simulador addSimulador(boolean dreta){
-        //int id,tipus;
-        return new Simulador(dreta);
-    }
-    
-    //FUNCIONS
     public double retornaNivell(){
         if(!dreta){
             return sensorNivell_esquerra;
@@ -89,13 +78,52 @@ public class Simulador {
         }
     }
     
-    public void mascotaMenja(Sensor plat, String nomMascota){
-        int quantitatMenjada = 5;
-        plat.setValorSimulador(plat.getValor() - quantitatMenjada);
-        System.out.println("La " + nomMascota +  " ha menjat " + quantitatMenjada + " grams");
+    
+    
+    //METODES
+    public static Simulador addSimulador(boolean dreta){
+        return new Simulador(dreta);
     }
     
-    public void carregaDiposit(Sensor diposit){
+    //FUNCIONS
+
+    //Divideix el nombre de raccions entre 24 hores
+    public void reparteixRaccions(double raccions){
+        double tempsEntreRaccions = raccions / 24;
         
     }
+    
+    public void mascotaMenja(Sensor plat, String nomMascota){
+        int quantitatMenjada = 10;
+        if(plat.getValor() > 0){
+            if(plat.getValor() < quantitatMenjada){
+                System.out.println("La " + nomMascota +  " ha menjat " + plat.getValor() + " grams");
+                plat.setValorSimulador(0);
+            }else{
+                plat.setValorSimulador(plat.getValor() - quantitatMenjada);
+                System.out.println("La " + nomMascota +  " ha menjat " + quantitatMenjada + " grams");
+            }
+        }else{
+            System.out.println("Plat buit, la mascota " + nomMascota +  " no ha menjat!");
+        }
+            
+            
+        
+    }
+    
+    public boolean carregaDiposit(boolean dreta){
+        if (dreta){
+            sensorNivell_dreta = 50;
+        }else if (!dreta){
+            sensorNivell_esquerra = 50;
+        }
+        return true;
+    }
+    
+    //TODO
+    //ajustar grams acumulats
+    //decrement del plat per fases
+    //ajustar decrement i emplenat del diposit
+    //Decimals grams/raccio
+    //Canvi de dia??? --> Guardar dia persistència -->InfluxDB
 }
