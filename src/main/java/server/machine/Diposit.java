@@ -23,7 +23,7 @@ public class Diposit {
     private double valorAlertaDiposit = 20.0;//Distància sensor menjar llença avís carregar dipòsit
     private static boolean dreta;
     private Sensor sensorNivell;
-    private boolean alertaDiposit;
+    private boolean alertaDiposit, dipositBuit;
     
     //CONSTRUCTORS
     public Diposit(Sensor sensorNivell, boolean dreta){
@@ -56,6 +56,10 @@ public class Diposit {
         return alertaDiposit;
     }
 
+    /*public boolean isDipositBuit() {
+        return dipositBuit;
+    }*/
+    
     public void setValorAlertaDiposit(double valorAlertaDiposit) {
         if(valorAlertaDiposit > 15 && valorAlertaDiposit < 40){
             this.valorAlertaDiposit = valorAlertaDiposit;
@@ -76,14 +80,14 @@ public class Diposit {
         double percentatge = ((DIPOSIT_BUIT - sensorNivell.getValor())/DIPOSIT_BUIT) *100;
         return percentatge; 
     }
-
+    
     public void setAlertaDiposit(){
         if(sensorNivell.getValor() > valorAlertaDiposit){
             this.alertaDiposit = true;
             //TODO   Activa la icona d'Alerta al Diposit
         }
     }
-    
+        
     public Boolean estaBuit(){
         if(sensorNivell.getValor() >= DIPOSIT_BUIT){
             return true;
@@ -91,5 +95,14 @@ public class Diposit {
            return false; 
         }
     }
+
+    /*public void comprovaDiposit(){
+        if(sensorNivell.getValor() < valorAlertaDiposit){
+            this.alertaDiposit = true;
+        }
+        if(sensorNivell.getValor() <= DIPOSIT_BUIT){
+            dipositBuit = true;
+        }
+    }*/
     
 }

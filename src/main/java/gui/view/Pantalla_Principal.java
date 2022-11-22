@@ -439,18 +439,12 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     private void raccioExtraDretaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raccioExtraDretaActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
+        confScreen.getConfControl().donaRaccioExtra(true,Integer.valueOf(confScreen.getRaccioExtraText().getText()));      
     }//GEN-LAST:event_raccioExtraDretaActionPerformed
 
     private void raccioExtraEsquerraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raccioExtraEsquerraActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
+        confScreen.getConfControl().donaRaccioExtra(false,Integer.valueOf(confScreen.getRaccioExtraText().getText()));     
     }//GEN-LAST:event_raccioExtraEsquerraActionPerformed
 
     private void boto_configuracioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boto_configuracioActionPerformed

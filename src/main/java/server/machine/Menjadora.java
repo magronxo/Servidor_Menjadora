@@ -113,10 +113,6 @@ public class Menjadora {
         }
         //Quan setejem limitDiari re-calculem els gramsRaccio i les hores entre raccions
         calculaRaccio();
-        
-      
-        //gramsRaccio = (double)limitDiari / limitRaccionsDia;
-        //gramsRaccio = (double)new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
     
     //Pantalla Configuracio permet canviar aquest paràmetre
@@ -129,8 +125,6 @@ public class Menjadora {
         }
         //Quan setejem limitRaccionsDia re-calculem els gramsRaccio
         calculaRaccio();
-        //gramsRaccio = (double)limitDiari / limitRaccionsDia;
-        //gramsRaccio = (double)new BigDecimal(gramsRaccio).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
     
     //MÈTODES
@@ -204,6 +198,9 @@ public class Menjadora {
         }
         simulador.mascotaMenja(sensorPlat, mascota.getNom());
         this.gramsAcumulatAvui+= gramsRaccio;
+        
+        //Comprova l'estat del dipòsit per actualitzar els nivells d'alerta i buit
+        //diposit.comprovaDiposit();
         
         //BLOCA-DESBLOCA MOTOR EN FUNCIÓ DEL NIVELL DEL DIPÒSIT
         if(diposit.estaBuit()){

@@ -23,7 +23,6 @@ import java.util.Calendar;
 public class Controlador_Principal {
     
     private static Pantalla_Principal principal;
-    //private Pantalla_Configuracio confScreen;
     private static Controlador_Configuracio confControl;
     private static Menjadora menjadoraDreta, menjadoraEsquerra;
     
@@ -56,19 +55,33 @@ public class Controlador_Principal {
 
     //FUNCIONS
     public void escriuValorsGui (){
-        //Arrodonim els sensors a 2 decimals:
-        double gramsPlatDreta = new BigDecimal(this.menjadoraDreta.getSensorPlat().getValor()).setScale(1, RoundingMode.HALF_UP).doubleValue();
-        double gramsPlatEsquerra = new BigDecimal(this.menjadoraEsquerra.getSensorPlat().getValor()).setScale(1, RoundingMode.HALF_UP).doubleValue();
-
+        
+        //Nivell alerta esta amagat
         principal.getAlertaDipositDretaIcon().setVisible(false);
         principal.getAlertaDipositEsquerraIcon().setVisible(false);
+        //El pintem si el dipòsit marca Alerta 
+        if(menjadoraDreta.getDiposit().isAlertaDiposit()){principal.getAlertaDipositDretaIcon().setVisible(true);}
+        if(menjadoraEsquerra.getDiposit().isAlertaDiposit()){principal.getAlertaDipositEsquerraIcon().setVisible(true);}
         
+        //Icona rotacio Motor
         principal.getSimulaMotorDretaIcon().setVisible(false);
-        principal.getSimulaMotorEsquerraIcon().setVisible(false);       
+        principal.getSimulaMotorEsquerraIcon().setVisible(false);
+        //La pintem si el interruptor del motor està accionat
+        if(menjadoraDreta.getMotorMenjadora().isInterruptor()){principal.getSimulaMotorDretaIcon().setVisible(true);}
+        if(menjadoraEsquerra.getMotorMenjadora().isInterruptor()){principal.getSimulaMotorEsquerraIcon().setVisible(true);}
         
+        //Icona Block Motor
         principal.getBlockMotorDretaIcon().setVisible(false);
         principal.getBlockMotorEsquerraIcon().setVisible(false);
+        //La pintem si el motor de la Menjadora esta bloquejat. El diposit estaBuit() també  el bloqueja
+        if(menjadoraDreta.getMotorMenjadora().isBlock()){principal.getBlockMotorDretaIcon().setVisible(true);}
+        if(menjadoraEsquerra.getMotorMenjadora().isBlock()){principal.getBlockMotorEsquerraIcon().setVisible(true);}
         
+        //PINTEM LA RESTA DE VALORS DE LA PANTALLA PRINCIPAL
+        //Arrodonim els sensors de pes a 2 decimals:
+        double gramsPlatDreta = new BigDecimal(this.menjadoraDreta.getSensorPlat().getValor()).setScale(1, RoundingMode.HALF_UP).doubleValue();
+        double gramsPlatEsquerra = new BigDecimal(this.menjadoraEsquerra.getSensorPlat().getValor()).setScale(1, RoundingMode.HALF_UP).doubleValue();
+               
         this.principal.getAcumulatGramsDreta().setText(String.valueOf((int)this.menjadoraDreta.getGramsAcumulatAvui()+" grams"));
         this.principal.getAcumulatGramsEsquerra().setText(String.valueOf((int)this.menjadoraEsquerra.getGramsAcumulatAvui()+" grams"));
         

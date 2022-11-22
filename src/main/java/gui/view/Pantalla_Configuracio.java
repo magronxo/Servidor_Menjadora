@@ -16,8 +16,8 @@ import javax.swing.JTextField;
  */
 public class Pantalla_Configuracio extends javax.swing.JFrame {
 
-    //private Controlador_Configuracio confControl;
     private Controlador_Configuracio confControl = new Controlador_Configuracio();
+    
     public Pantalla_Configuracio() {
         initComponents();
     }
@@ -464,8 +464,6 @@ public class Pantalla_Configuracio extends javax.swing.JFrame {
         }catch(NumberFormatException ex){
             System.err.println("\t\t\t ERROR!! Pes Mascota Esquerra invàlid !!!!");
         }
-        
-        //confControl.getMascotaEsquerra().setPesMascota(Double.parseDouble(pesMascotaEsquerra.getText()));
     }//GEN-LAST:event_pesMascotaEsquerraFocusLost
 
     private void pesMascotaDretaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pesMascotaDretaFocusLost
@@ -497,8 +495,7 @@ public class Pantalla_Configuracio extends javax.swing.JFrame {
 
     private void gatGosEsquerraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_gatGosEsquerraFocusLost
         // TODO add your handling code here:
-        confControl.getMascotaEsquerra().setGat((String)gatGosEsquerra.getSelectedItem());
-        
+        confControl.getMascotaEsquerra().setGat((String)gatGosEsquerra.getSelectedItem());       
     }//GEN-LAST:event_gatGosEsquerraFocusLost
 
     private void gatGosDretaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_gatGosDretaFocusLost

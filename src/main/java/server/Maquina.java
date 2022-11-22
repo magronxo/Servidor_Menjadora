@@ -25,7 +25,6 @@ public class Maquina {
     private int id;
     //private boolean dreta;
     private Mascota mascotaDreta, mascotaEsquerra;
-    private static int raccioExtra = 10;
     private Menjadora menjadoraDreta, menjadoraEsquerra;
     private Dades dadesDreta, dadesEsquerra;
     private Controlador_Principal controlador;
@@ -33,11 +32,10 @@ public class Maquina {
     //CONSTRUCTORS
     public Maquina(){    
     }
-    public Maquina(int id, Mascota mascotaDreta, Mascota mascotaEsquerra, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra, int raccioExtra, Dades dadesDreta, Dades dadesEsquerra, Controlador_Principal controlador){
+    public Maquina(int id, Mascota mascotaDreta, Mascota mascotaEsquerra, Menjadora menjadoraDreta, Menjadora menjadoraEsquerra, Dades dadesDreta, Dades dadesEsquerra, Controlador_Principal controlador){
         this.id=id;
         this.mascotaDreta=mascotaDreta;
         this.mascotaEsquerra=mascotaEsquerra;
-        this.raccioExtra=raccioExtra;
         this.menjadoraDreta=menjadoraDreta;
         this.menjadoraEsquerra=menjadoraEsquerra;
         this.dadesDreta=dadesDreta;
@@ -83,16 +81,16 @@ public class Maquina {
         menjadoraDreta.setDosisDiaria(mascotaDreta.getGat(), mascotaDreta.getEdat(), mascotaDreta.getPesMascota());
         menjadoraEsquerra.setDosisDiaria(mascotaEsquerra.getGat(), mascotaEsquerra.getEdat(), mascotaEsquerra.getPesMascota());
         
+        
+        
         dadesDreta = new Dades().addDades(menjadoraDreta);        
         dadesEsquerra = new Dades().addDades(menjadoraEsquerra);
-        
-        
+
         //Iniciem la Pantalla Principal
         controlador = new Controlador_Principal().addControlador(menjadoraDreta, menjadoraEsquerra);
-        //controlador.setMenjadoraDreta(menjadoraDreta);
-        //controlador.setMenjadoraEsquerra(menjadoraEsquerra);
+        //crea org i bucket influx
         
-        return new Maquina(id, mascotaDreta, mascotaEsquerra, menjadoraDreta, menjadoraEsquerra, raccioExtra, dadesDreta, dadesEsquerra, controlador);
+        return new Maquina(id, mascotaDreta, mascotaEsquerra, menjadoraDreta, menjadoraEsquerra, dadesDreta, dadesEsquerra, controlador);
     }
     
     public void funcionamentMaquina(){
@@ -122,11 +120,5 @@ public class Maquina {
         if(!menjadoraEsquerra.getDiposit().estaBuit()){
             menjadoraEsquerra.getMotorMenjadora().desblocaRele();
         }
-    }
-    
-    //FUNCIONS
-    public void donaRaccioExtra(double raccioExtra ){
-        menjadoraDreta.raccioExtra(raccioExtra);
-        menjadoraEsquerra.raccioExtra(raccioExtra);
     }
 }
