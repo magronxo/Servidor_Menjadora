@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import login.Client.MenjadoraReader.MenjadoraReader;
-import server.machine.Menjadora;
 import server.Servidor_Menjadora;
 
 import java.text.Format;

@@ -1,7 +1,5 @@
 package login.Client.MenjadoraReader;
 
-import server.machine.Mascota;
-
 public class MascotaReader {
 
     String nom;

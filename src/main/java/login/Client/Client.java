@@ -14,7 +14,7 @@ public class Client {
         while (true) {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             try {
-                System.out.print("Comanda a realitzar (login/restore/check/logout): ");
+                System.out.print("Comanda a realitzar (login/restore/check/logout/menjadora): ");
                 comanda = br.readLine();
             } catch (IOException ioe) {
                 ioe.printStackTrace();

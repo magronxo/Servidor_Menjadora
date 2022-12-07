@@ -78,7 +78,7 @@ public class Server {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "uf":
+            case "uf": // first update
                 if (sMenjadora != null) {
                     sendSocketOut(sMenjadora.firstUpdate());
                 } else {
@@ -86,10 +86,10 @@ public class Server {
                     sendSocketOut(sMenjadora.firstUpdate());
                 }
                 break;
-            case "u":
+            case "u": // update
                 if (sMenjadora != null) {
-                    sendSocketOut("nu");
-                    //sendSocketOut(sMenjadora.update());
+                    //sendSocketOut("nu");
+                    sendSocketOut(sMenjadora.update());
                 } else {
                     sMenjadora = new SMenjadora();
                     sendSocketOut(sMenjadora.firstUpdate());

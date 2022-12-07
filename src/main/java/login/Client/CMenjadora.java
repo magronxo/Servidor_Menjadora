@@ -1,12 +1,10 @@
 package login.Client;
 
-import com.influxdb.client.JSON;
 import login.Client.MenjadoraReader.MaquinaReader;
 import login.Client.MenjadoraReader.MascotaReader;
 import login.Client.MenjadoraReader.MenjadoraReader;
 import login.Exceptions.ConnectionErrorException;
 import org.json.JSONObject;
-import server.Maquina;
 
 import java.util.List;
 import java.util.concurrent.Executors;

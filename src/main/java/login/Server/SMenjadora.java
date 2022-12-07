@@ -1,41 +1,75 @@
 package login.Server;
 
-import login.Client.MenjadoraReader.MenjadoraReader;
+import com.influxdb.client.JSON;
+import login.Server.MenjadoraReader.MenjadoraReader;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SMenjadora {
+    DatabaseManager databaseManager;
     public SMenjadora() {
+        databaseManager = new DatabaseManager("idMaquina1"); /* ID provisional, cada màquina
+                                                                      /* tindrà un ID únic.           */
     }
 
     public String firstUpdate(){
         System.out.println("FIRSTUpdate");
-        return generateJson().toString();
+        return generateJson(databaseManager.compareChanges(true)).toString();
     }
     public String update(){
         System.out.println("Update");
-        return "null";
+        JSONObject resultat = generateJson(databaseManager.compareChanges());
+        if (resultat.isEmpty()) {
+            return "nu";
+        } else {
+            return resultat.toString();
+        }
     }
 
-    private JSONObject generateJson() {
+    private JSONObject generateJson(Map<String, Integer> valorsALlegir) {
 
         JSONObject maquinaJSON = new JSONObject();
         JSONObject menjadoraEsquerra = new JSONObject();
-        JSONObject mascotaEsquerra = new JSONObject();
         JSONObject menjadoraDreta = new JSONObject();
 
-        menjadoraEsquerra.put("sensorPlat", 3.2);
-        menjadoraEsquerra.put("gramsAcumulatAvui", 56.3);
-        menjadoraEsquerra.put("raccionsAcumuladesAvui", 4);
-        menjadoraEsquerra.put("gramsRaccio", 9.2);
-        menjadoraEsquerra.put("limitDiari", 351);
-        menjadoraEsquerra.put("valorDiposit", 200);
-        menjadoraEsquerra.put("limitRaccionsDia", 15);
+        for (String i : valorsALlegir.keySet()) {
+            int valorEoD = valorsALlegir.get(i);
+            switch (valorEoD) {
+                case 0:
+                    menjadoraEsquerra.put(i, databaseManager.readValueMaquina(i, 0));
+                    break;
+                case 1:
+                    menjadoraDreta.put(i, databaseManager.readValueMaquina(i, 1));
+                    break;
+                case 2:
+                    menjadoraEsquerra.put(i, databaseManager.readValueMaquina(i, 0));
+                    menjadoraDreta.put(i, databaseManager.readValueMaquina(i, 1));
+                    break;
+            }
+        }
 
-        mascotaEsquerra.put("nom", "Duna");
-        menjadoraEsquerra.put("mascota", mascotaEsquerra);
+        // Inici codi provisional per la mascota
+        if (menjadoraDreta.has("nomMascota")) {
+            JSONObject mascota = new JSONObject();
+            mascota.put("nom", "Duna");
+            menjadoraDreta.put("mascota", mascota);
+            menjadoraDreta.remove("nomMascota");
+        }
+        if (menjadoraEsquerra.has("nomMascota")) {
+            JSONObject mascota = new JSONObject();
+            mascota.put("nom", "Duna");
+            menjadoraEsquerra.put("mascota", mascota);
+            menjadoraEsquerra.remove("nomMascota");
+        }
+        // Fi codi provisional per la mascota
 
-        maquinaJSON.put("menjadoraDreta", menjadoraEsquerra);
-        maquinaJSON.put("menjadoraEsquerra", menjadoraEsquerra);
+        if (!menjadoraEsquerra.isEmpty()) {
+            maquinaJSON.put("menjadoraEsquerra", menjadoraEsquerra);
+        }if (!menjadoraDreta.isEmpty()) {
+            maquinaJSON.put("menjadoraDreta", menjadoraDreta);
+        }
 
         return maquinaJSON;
     }
